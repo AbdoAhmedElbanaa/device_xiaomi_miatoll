@@ -9,8 +9,8 @@ TARGET_SUPPORTS_OMX_SERVICE := false
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
 
-# Inherit some common Clover stuff.
-$(call inherit-product, vendor/clover/config/common_full_phone.mk)
+# Inherit some common Lineage stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from miatoll device
 $(call inherit-product, device/xiaomi/miatoll/miatoll.mk)
@@ -19,15 +19,7 @@ $(call inherit-product, device/xiaomi/miatoll/miatoll.mk)
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
 
-TARGET_BOOT_ANIMATION_RES := 1080
-
-# Clover assortment
-TARGET_FACE_UNLOCK_SUPPORTED := true
-TARGET_SUPPORTS_GOOGLE_RECORDER := true
-TARGET_SUPPORTS_QUICK_TAP := true
-USE_PIXEL_CHARGER := true
-
-PRODUCT_NAME := clover_miatoll
+PRODUCT_NAME := lineage_miatoll
 PRODUCT_DEVICE := miatoll
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := Redmi
