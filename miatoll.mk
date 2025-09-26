@@ -383,23 +383,9 @@ PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink
 
 
-# ===============================
-# RisingOS Custom Flags
-# ===============================
-
 # Maintainer name
 RISING_MAINTAINER := "AbdelmgeedElbanaa"
 
-# Build properties
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    RisingChipset="Qualcomm Snapdragon 720G" \
-    RisingMaintainer="AbdelmgeedElbanaa"
-
-# Use Lawnchair Launcher (true = enable / false = disable)
-TARGET_PREBUILT_LAWNCHAIR_LAUNCHER := true
-
-# Blur effects (true = enable / false = disable)
-TARGET_ENABLE_BLUR := true
 
 # Inherit proprietary targets
 $(call inherit-product, vendor/xiaomi/miatoll/miatoll-vendor.mk)
