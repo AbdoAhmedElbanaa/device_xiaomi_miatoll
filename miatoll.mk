@@ -383,9 +383,5 @@ PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink
 
 
-# Maintainer name
-RISING_MAINTAINER := "AbdelmgeedElbanaa"
-
-
 # Inherit proprietary targets
 $(call inherit-product, vendor/xiaomi/miatoll/miatoll-vendor.mk)
