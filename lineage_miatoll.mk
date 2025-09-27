@@ -27,8 +27,11 @@ PRODUCT_MODEL := SM6250
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
-# Lunch banner maintainer variable
-RISING_MAINTAINER="AbdoElbanaa"
+RISING_MAINTAINER="AbdelmgeedElbanaa"
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    RisingChipset="Qualcomm Snapdragon 720G" \
+    RisingMaintainer="AbdelmgeedElbanaa"
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="miatoll_global-user 12 SKQ1.211019.001 V14.0.3.0.SJZMIXM release-keys" \
