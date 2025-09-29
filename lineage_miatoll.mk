@@ -27,12 +27,13 @@ PRODUCT_MODEL := SM6250
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
-RISING_MAINTAINER="AbdelmgeedElbanaa"
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    RisingChipset="Qualcomm Snapdragon 720G" \
-    RisingMaintainer="AbdelmgeedElbanaa"
-
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="miatoll_global-user 12 SKQ1.211019.001 V14.0.3.0.SJZMIXM release-keys" \
     BuildFingerprint=Redmi/miatoll_global/miatoll:12/RKQ1.211019.001/V14.0.3.0.SJZMIXM:user/release-keys
+
+
+RISING_MAINTAINER := Abdoelbanaa
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    RisingMaintainer="Abdoelbanaa" \
+    RisingChipset="Snapdragon 720G"
