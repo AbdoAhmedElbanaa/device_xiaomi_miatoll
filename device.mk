@@ -296,7 +296,7 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/interfaces \
     hardware/google/pixel/pixelstats \
     hardware/google/pixel/power-libperfmgr \
-    hardware/voltage/interfaces/power-libperfmgr \
+    hardware/lineage/interfaces/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \
     hardware/xiaomi
 
@@ -344,6 +344,10 @@ PRODUCT_COPY_FILES += \
 # Thermal HAL
 PRODUCT_PACKAGES += \
     android.hardware.thermal-service.qti
+
+# TimeKeep
+PRODUCT_PACKAGES += \
+    TimeKeep
 
 # UFFD GC
 PRODUCT_ENABLE_UFFD_GC := true
