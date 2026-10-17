@@ -15,4 +15,10 @@
     <!-- Show the GPG UID (name/email) -->
     <bool name="config_show_gpg_uid">true</bool>
 
+    <!-- Enable Dual Stereo Speaker for miatoll -->
+    <bool name="config_support_dual_speaker" translatable="false">true</bool>
+
+    <!-- Enable Smart Microphone Noise Cancellation for miatoll -->
+    <bool name="config_support_mic_noise_cancellation" translatable="false">true</bool>
+
 </resources>

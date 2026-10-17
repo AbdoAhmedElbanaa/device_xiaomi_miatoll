@@ -41,6 +41,9 @@
         <library name="volume_listener" path="libvolumelistener.so"/>
         <library name="audiosphere" path="libasphere.so"/>
         <library name="shoebox" path="libshoebox.so"/>
+        <library name="axionfx" path="libaxionfx_legacy.so"/>
+        <library name="axionfxaidl" path="libaxionfxaidl.so"/>
+        <library name="clarifae" path="libclarifae.so"/>
     </libraries>
     <effects>
         <effectProxy name="bassboost" library="proxy" uuid="14804144-a5ee-4d24-aa88-0002a5d5c51b">
@@ -89,10 +92,14 @@
         <effect name="notification_helper" library="volume_listener" uuid="0b776dde-0590-11e5-81ba-0025b32654a0"/>
         <effect name="audiosphere" library="audiosphere" uuid="184e62ab-2d19-4364-9d1b-c0a40733866c"/>
         <effect name="shoebox" library="shoebox" uuid="1eab784c-1a36-4b2a-b7fc-e34c44cab89e"/>
+        <effect name="axionfx" library="axionfx" uuid="f35cb927-a887-4f3d-847f-770634486d53"/>
+        <effect name="clarifae_ns" library="clarifae" uuid="c1a71fae-0001-4a5e-9b10-43578768aaf3"/>
+        <effect name="clarifae_out" library="clarifae" uuid="c1a71fae-0002-4a5e-9b10-43578768aaf3"/>
     </effects>
     <postprocess>
         <stream type="music">
             <apply effect="music_helper"/>
+            <apply effect="clarifae_out"/>
         </stream>
         <stream type="ring">
             <apply effect="ring_helper"/>
@@ -102,6 +109,7 @@
         </stream>
         <stream type="voice_call">
             <apply effect="voice_helper"/>
+            <apply effect="clarifae_out"/>
         </stream>
         <stream type="notification">
             <apply effect="notification_helper"/>
@@ -111,6 +119,16 @@
         <stream type="voice_communication">
             <apply effect="aec"/>
             <apply effect="ns"/>
+            <apply effect="clarifae_ns"/>
+        </stream>
+        <stream type="mic">
+            <apply effect="clarifae_ns"/>
+        </stream>
+        <stream type="camcorder">
+            <apply effect="clarifae_ns"/>
+        </stream>
+        <stream type="voice_recognition">
+            <apply effect="clarifae_ns"/>
         </stream>
     </preprocess>
 </audio_effects_conf>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-FileCopyrightText: RisingOS Android Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Unblock Notification Categorization & Summarization -->
+    <string-array name="config_notificationDefaultUnsupportedAdjustments" translatable="false" />
+
+    <!-- Approved System Intelligence & Assistant Listener Access Packages -->
+    <string-array name="config_defaultListenerAccessPackages" translatable="false">
+        <item>com.google.android.apps.nexuslauncher</item>
+        <item>com.google.android.setupwizard</item>
+        <item>com.google.android.apps.pixelmigrate</item>
+        <item>com.google.android.as</item>
+        <item>com.google.android.projection.gearhead</item>
+    </string-array>
+
+    <!-- Google Passkey & Credential Provider Services -->
+    <string-array name="config_enabledCredentialProviderService" translatable="false">
+        <item>com.google.android.gms/.auth.api.credentials.credman.service.PasswordAndPasskeyService</item>
+    </string-array>
+    <string-array name="config_primaryCredentialProviderService" translatable="false">
+        <item>com.google.android.gms/.auth.api.credentials.credman.service.PasswordAndPasskeyService</item>
+    </string-array>
+
+    <!-- Force Queryable System Packages (Prevents GMS/GSF/Vending visibility issues) -->
+    <string-array name="config_forceQueryablePackages" translatable="false">
+        <item>com.android.settings</item>
+        <item>com.android.providers.settings</item>
+        <item>com.google.android.gms</item>
+        <item>com.google.android.gsf</item>
+        <item>com.android.vending</item>
+        <item>com.google.android.partnersetup</item>
+    </string-array>
+
+    <!-- Define device configs on boot:
+         RisingOS DeviceConfigUtils automatically applies these flags on boot and protects
+         them from being remotely disabled by server-side Phenotype rollbacks. -->
+    <string-array name="device_configs_override" translatable="false">
+        <!-- 1. Notification Organizer, Assistant Adjustments & Essential -->
+        <item>systemui/notification_assistant_adjustments=true</item>
+        <item>systemui/notification_categorization=true</item>
+        <item>systemui/notification_organizer=true</item>
+        <item>systemui/notification_essential=true</item>
+        <item>systemui/notification_summarization=true</item>
+        <item>systemui/enable_essential_notifications=true</item>
+        <item>systemui/compact_heads_up_notification=true</item>
+
+        <!-- 2. Google Android System Intelligence (AiAi) Notification Feature Flags -->
+        <item>device_personalization_services/Notification__enable_notification_assistant=true</item>
+        <item>device_personalization_services/Notification__enable_smart_replies=true</item>
+        <item>device_personalization_services/Notification__enable_smart_actions=true</item>
+        <item>device_personalization_services/Notification__enable_notification_categorization=true</item>
+        <item>device_personalization_services/Notification__enable_notification_organizer=true</item>
+        <item>device_personalization_services/Notification__enable_essential_notifications=true</item>
+        <item>device_personalization_services/Notification__enable_notification_summarization=true</item>
+
+        <!-- 3. Overview / Recents AI Selection (Text, Lens & Image OCR in Recents) -->
+        <item>device_personalization_services/Overview__enable_barcode_detection=true</item>
+        <item>device_personalization_services/Overview__enable_image_search=true</item>
+        <item>device_personalization_services/Overview__enable_lens_r_overview_long_press=true</item>
+        <item>device_personalization_services/Overview__enable_lens_r_overview_select_mode=true</item>
+        <item>device_personalization_services/Overview__enable_lens_r_overview_translate_action=true</item>
+
+        <!-- 4. Live Translate & Captions -->
+        <item>device_personalization_services/LiveTranslate__enable_live_translate=true</item>
+        <item>device_personalization_services/Captions__enable_system_captions=true</item>
+
+        <!-- 5. At a Glance / Smartspace Enhanced Features -->
+        <item>device_personalization_services/EchoSmartspace__enable_consolidated_weather=true</item>
+        <item>device_personalization_services/EchoSmartspace__enable_package_delivery=true</item>
+        <item>device_personalization_services/EchoSmartspace__enable_flight_landing_smartspace_aiai=true</item>
+        <item>device_personalization_services/EchoSmartspace__enable_hotel_smartspace_aiai=true</item>
+        <item>device_personalization_services/EchoSmartspace__enable_doorbell=true</item>
+
+        <!-- 6. Wallpaper Effects Hardware Adaptations for Snapdragon 720G (GPU vs TPU) -->
+        <item>device_personalization_services/WallpaperEffects__enable_cinematic_effect=true</item>
+        <item>device_personalization_services/WallpaperEffects__use_gpu=true</item>
+        <item>device_personalization_services/WallpaperEffects__use_tpu=false</item>
+        <item>device_personalization_services/WallpaperEffects__enable_person_segment_tpu=false</item>
+
+        <!-- 7. SystemUI Quick Access & Wallet -->
+        <item>systemui/clipboard_overlay_show_actions=true</item>
+        <item>systemui/quick_access_wallet_enabled=true</item>
+    </string-array>
+</resources>

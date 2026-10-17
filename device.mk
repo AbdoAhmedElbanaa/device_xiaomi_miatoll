@@ -37,6 +37,7 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
+    libclarifae \
     sound_trigger.primary.atoll:32 \
     tinymix
 
@@ -73,7 +74,6 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@4.0-impl-qti-display
 
 PRODUCT_PACKAGES += \
-    disable_configstore \
     gralloc.qcom \
     hwcomposer.qcom \
     vendor.qti.hardware.display.allocator-service \
@@ -96,6 +96,10 @@ PRODUCT_PACKAGES += \
 # FM
 PRODUCT_PACKAGES += \
     FM2
+
+# GFX
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.config.avoid_gfx_accel=true
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -298,6 +302,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel/power-libperfmgr \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \
+    hardware/qcom-caf/wlan \
+    hardware/qcom-caf/wlan/qcwcn \
     hardware/xiaomi
 
 # Speed profile services and wifi-service to reduce RAM and storage
@@ -349,6 +355,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     TimeKeep
 
+# RisingFX Audio Effects
+include packages/apps/AxionFx/config.mk
+
 # UFFD GC
 PRODUCT_ENABLE_UFFD_GC := true
 
@@ -372,6 +381,27 @@ PRODUCT_PACKAGES += \
 # Vibrator
 $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.mk)
 
+# VSync
+PRODUCT_VENDOR_PROPERTIES += \
+    debug.cpurend.vsync=false
+
+# Clarifae AI Voice Clarity defaults
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.clarifae.enabled=1 \
+    persist.vendor.clarifae.in_enabled=1 \
+    persist.vendor.clarifae.out_enabled=0 \
+    persist.vendor.clarifae.mode=1 \
+    persist.vendor.clarifae.strength=70 \
+    persist.vendor.clarifae.out_strength=50 \
+    persist.vendor.clarifae.atten_db=24 \
+    persist.vendor.clarifae.vad=50 \
+    persist.vendor.clarifae.targets=mic,voice_comm,camcorder,voice_rec \
+    persist.vendor.clarifae.out_targets=music,voice_call \
+    persist.vendor.clarifae.highpass=1 \
+    persist.vendor.clarifae.autogain=0 \
+    persist.vendor.clarifae.loglevel=1
+
+
 # WiFi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
@@ -390,6 +420,13 @@ PRODUCT_COPY_FILES += \
 # WiFi firmware symlinks
 PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink
+
+# ADB Root & Debugging defaults
+PRODUCT_SYSTEM_PROPERTIES += \
+    service.adb.root=1 \
+    persist.service.adb.enable=1 \
+    persist.sys.usb.config=adb \
+    persist.sys.root_access=3
 
 # Inherit proprietary targets
 $(call inherit-product, vendor/xiaomi/miatoll/miatoll-vendor.mk)

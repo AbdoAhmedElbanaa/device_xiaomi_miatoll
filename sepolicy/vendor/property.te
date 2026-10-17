@@ -4,3 +4,9 @@ vendor_restricted_prop(vendor_fingerprint_prop)
 
 # WiFi
 vendor_internal_prop(vendor_wcnss_service_prop)
+
+# Dual Audio
+vendor_public_prop(vendor_dual_audio_prop)
+
+# Clarifae AI Clarity
+vendor_public_prop(vendor_clarifae_prop)

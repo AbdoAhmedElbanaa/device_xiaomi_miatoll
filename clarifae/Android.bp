@@ -1,0 +1,70 @@
+/*
+ * Copyright (C) 2026 The LineageOS Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_library_shared {
+    name: "libclarifae",
+    vendor: true,
+    relative_install_path: "soundfx",
+
+    srcs: [
+        "native/effect.c",
+        "native/config.c",
+        "native/ringbuf.c",
+        "native/resampler.c",
+        "native/backend_rnnoise.c",
+        "native/backend_dtln.c",
+        "native/backend_deepfilternet.c",
+        "third_party/rnnoise/src/celt_lpc.c",
+        "third_party/rnnoise/src/denoise.c",
+        "third_party/rnnoise/src/kiss_fft.c",
+        "third_party/rnnoise/src/nnet.c",
+        "third_party/rnnoise/src/nnet_default.c",
+        "third_party/rnnoise/src/pitch.c",
+        "third_party/rnnoise/src/rnn.c",
+        "third_party/rnnoise/src/rnnoise_data.c",
+        "third_party/rnnoise/src/rnnoise_tables.c",
+        "third_party/rnnoise/src/parse_lpcnet_weights.c",
+    ],
+
+    local_include_dirs: [
+        "native",
+        "native/include",
+        "third_party/rnnoise/include",
+        "third_party/rnnoise/src",
+    ],
+
+    header_libs: [
+        "libhardware_headers",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+    ],
+
+    cflags: [
+        "-O3",
+        "-Wall",
+        "-Wno-unused-parameter",
+        "-Wno-unused-function",
+        "-Wno-unused-variable",
+        "-Wno-sequence-point",
+        "-fvisibility=hidden",
+        "-DRNNOISE_BUILD",
+        "-DCLARIFAE_VENDOR_BUILD",
+    ],
+
+    arch: {
+        arm64: {
+            cflags: [
+                "-march=armv8-a+simd",
+            ],
+        },
+    },
+}

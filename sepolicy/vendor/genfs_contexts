@@ -3,6 +3,16 @@ genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/idle_state           
 
 # Health
 genfscon sysfs /class/power_supply/battery/capacity                                                                               u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/battery/input_suspend                                                                          u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/battery/charging_enabled                                                                       u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/battery/battery_charging_enabled                                                               u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/usb/quick_charge_type                                                                          u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/usb/real_type                                                                                  u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/usb/type                                                                                       u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/main/real_type                                                                                 u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/main/type                                                                                      u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/main/quick_charge_type                                                                         u:object_r:vendor_sysfs_battery_supply:s0
+genfscon sysfs /class/power_supply/battery/fastcharge_mode                                                                       u:object_r:vendor_sysfs_battery_supply:s0
 genfscon sysfs /devices/platform/soc/soc:maxim_ds28e16/power_supply/batt_verify                                                   u:object_r:vendor_sysfs_battery_supply:s0
 
 # LED

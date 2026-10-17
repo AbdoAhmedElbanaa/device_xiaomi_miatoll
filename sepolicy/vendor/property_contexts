@@ -11,3 +11,12 @@ vendor.sys.thermal.                     u:object_r:vendor_thermal_normal_prop:s0
 
 # WiFi
 persist.vendor.cnss-daemon.             u:object_r:vendor_wcnss_service_prop:s0
+
+# Dual Audio
+persist.vendor.audio.dual_audio                 u:object_r:vendor_dual_audio_prop:s0
+persist.vendor.audio.dual_audio_preset          u:object_r:vendor_dual_audio_prop:s0
+persist.vendor.audio.dual_audio_ear_gain        u:object_r:vendor_dual_audio_prop:s0
+persist.vendor.audio.dual_audio_balance         u:object_r:vendor_dual_audio_prop:s0
+
+# Clarifae AI Clarity
+persist.vendor.clarifae.                        u:object_r:vendor_clarifae_prop:s0

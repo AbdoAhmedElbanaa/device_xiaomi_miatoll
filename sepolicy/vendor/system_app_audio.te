@@ -1,0 +1,16 @@
+# Dual Audio SELinux Policies for Miatoll
+
+# Allow audio HAL to get and set dual audio properties
+set_prop(hal_audio_default, vendor_dual_audio_prop)
+get_prop(hal_audio_default, vendor_dual_audio_prop)
+
+# Allow system apps (Settings) to get dual audio properties
+get_prop(system_app, vendor_dual_audio_prop)
+
+# Allow system_server and audioserver to get dual audio properties
+get_prop(system_server, vendor_dual_audio_prop)
+get_prop(audioserver, vendor_dual_audio_prop)
+
+# Allow vendor_init to set default dual audio properties
+set_prop(vendor_init, vendor_dual_audio_prop)
+

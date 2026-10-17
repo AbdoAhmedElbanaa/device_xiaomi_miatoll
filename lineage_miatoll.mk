@@ -36,10 +36,19 @@ TARGET_ENABLE_BLUR := true
 # Whether to ship aperture camera, false by default
 PRODUCT_NO_CAMERA := false
 
+# Disable legacy AudioFX in favor of RisingFX
+TARGET_EXCLUDES_AUDIOFX := true
+
 # GMS Flags
 # GMS build flags, true by default
 # Ship with GMS packages, replaces default AOSP packages with Google manufactured packages.
 WITH_GMS := true
+
+# VINTF Kernel Requirements (non-GKI custom kernel)
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
+# Enable Insecure ADB (Disables ADB authentication safely via Lineage build system)
+WITH_ADB_INSECURE := true
 
 PRODUCT_NAME := lineage_miatoll
 PRODUCT_DEVICE := miatoll

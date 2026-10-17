@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-FileCopyrightText: RisingOS Android Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Enable smart timezone geolocation detection via Google Services -->
+    <bool name="config_enableGeolocationTimeZoneDetection">true</bool>
+    <bool name="config_enablePrimaryLocationTimeZoneProvider">true</bool>
+
+    <!-- Enable embedded Google settings help links -->
+    <bool name="config_settingsHelpLinksEnabled">true</bool>
+
+    <!-- Biometric FRR notifications -->
+    <bool name="config_biometricFrrNotificationEnabled">true</bool>
+
+    <!-- Force all packages on system partitions as queryable by any app to prevent GSF/GMS visibility issues -->
+    <bool name="config_forceSystemPackagesQueryable">true</bool>
+
+    <!-- Disable Desktop Mode / Secondary display on miatoll -->
+    <bool name="config_canInternalDisplayHostDesktops">false</bool>
+    <bool name="config_isDesktopModeSupported">false</bool>
+    <bool name="config_isDesktopModeDevOptionSupported">false</bool>
+</resources>

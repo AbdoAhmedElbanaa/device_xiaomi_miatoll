@@ -2832,6 +2832,106 @@
         <ctl name="SpkrRight SWR DAC_Port Switch" value="1" />
     </path>
 
+    <!-- Dual Audio Custom Paths -->
+    <path name="dual-audio-on">
+        <ctl name="EAR_RDAC Switch" value="1" />
+        <ctl name="RDAC3_MUX" value="RX1" />
+        <ctl name="RX_EAR Mode" value="ON" />
+    </path>
+
+    <!-- Dual Audio Presets -->
+    <path name="dual-audio-preset-balanced">
+        <ctl name="EAR SPKR PA Gain" value="G_3_DB" />
+        <ctl name="RX_RX0 Digital Volume" value="84" />
+        <ctl name="RX_RX1 Digital Volume" value="84" />
+        <ctl name="WSA_RX0 Digital Volume" value="84" />
+        <ctl name="WSA_RX1 Digital Volume" value="84" />
+    </path>
+
+    <path name="dual-audio-preset-vocal">
+        <ctl name="EAR SPKR PA Gain" value="G_4_DB" />
+        <ctl name="RX_RX0 Digital Volume" value="86" />
+        <ctl name="RX_RX1 Digital Volume" value="86" />
+        <ctl name="WSA_RX0 Digital Volume" value="80" />
+        <ctl name="WSA_RX1 Digital Volume" value="80" />
+    </path>
+
+    <path name="dual-audio-preset-dynamic">
+        <ctl name="EAR SPKR PA Gain" value="G_6_DB" />
+        <ctl name="RX_RX0 Digital Volume" value="88" />
+        <ctl name="RX_RX1 Digital Volume" value="88" />
+        <ctl name="WSA_RX0 Digital Volume" value="86" />
+        <ctl name="WSA_RX1 Digital Volume" value="86" />
+    </path>
+
+    <path name="dual-audio-preset-bass">
+        <ctl name="EAR SPKR PA Gain" value="G_1_DB" />
+        <ctl name="RX_RX0 Digital Volume" value="80" />
+        <ctl name="RX_RX1 Digital Volume" value="80" />
+        <ctl name="WSA_RX0 Digital Volume" value="88" />
+        <ctl name="WSA_RX1 Digital Volume" value="88" />
+    </path>
+
+    <path name="dual-audio-preset-ambient">
+        <ctl name="EAR SPKR PA Gain" value="G_0_DB" />
+        <ctl name="RX_RX0 Digital Volume" value="78" />
+        <ctl name="RX_RX1 Digital Volume" value="78" />
+        <ctl name="WSA_RX0 Digital Volume" value="84" />
+        <ctl name="WSA_RX1 Digital Volume" value="84" />
+    </path>
+
+    <!-- Dual Audio Hardware PA Gain Levels -->
+    <path name="dual-audio-gain-0">
+        <ctl name="EAR SPKR PA Gain" value="G_DEFAULT" />
+    </path>
+
+    <path name="dual-audio-gain-1">
+        <ctl name="EAR SPKR PA Gain" value="G_1_DB" />
+    </path>
+
+    <path name="dual-audio-gain-2">
+        <ctl name="EAR SPKR PA Gain" value="G_2_DB" />
+    </path>
+
+    <path name="dual-audio-gain-3">
+        <ctl name="EAR SPKR PA Gain" value="G_3_DB" />
+    </path>
+
+    <path name="dual-audio-gain-4">
+        <ctl name="EAR SPKR PA Gain" value="G_4_DB" />
+    </path>
+
+    <path name="dual-audio-gain-5">
+        <ctl name="EAR SPKR PA Gain" value="G_5_DB" />
+    </path>
+
+    <path name="dual-audio-gain-6">
+        <ctl name="EAR SPKR PA Gain" value="G_6_DB" />
+    </path>
+
+    <!-- Dual Audio Speaker Balance Levels -->
+    <path name="dual-audio-balance-top">
+        <ctl name="WSA_RX0 Digital Volume" value="80" />
+        <ctl name="WSA_RX1 Digital Volume" value="80" />
+        <ctl name="RX_RX0 Digital Volume" value="88" />
+        <ctl name="RX_RX1 Digital Volume" value="88" />
+    </path>
+
+    <path name="dual-audio-balance-balanced">
+        <ctl name="WSA_RX0 Digital Volume" value="84" />
+        <ctl name="WSA_RX1 Digital Volume" value="84" />
+        <ctl name="RX_RX0 Digital Volume" value="84" />
+        <ctl name="RX_RX1 Digital Volume" value="84" />
+    </path>
+
+    <path name="dual-audio-balance-bottom">
+        <ctl name="WSA_RX0 Digital Volume" value="88" />
+        <ctl name="WSA_RX1 Digital Volume" value="88" />
+        <ctl name="RX_RX0 Digital Volume" value="80" />
+        <ctl name="RX_RX1 Digital Volume" value="80" />
+    </path>
+
+
     <path name="speaker-mono">
         <ctl name="TERT_MI2S_RX Channels" value="One" />
         <ctl name="WSA RX0 MUX" value="AIF1_PB" />
