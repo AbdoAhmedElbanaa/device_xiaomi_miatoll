@@ -93,21 +93,21 @@ static int get_int(const char* name_sys, const char* name_vendor, const char* na
 }
 
 void clarifae_config_load(clarifae_config_t* cfg) {
-    cfg->enabled      = get_int("persist.vendor.clarifae.enabled",      "persist.clarifae.enabled",      "persist.sys.clarifae.enabled",      1, 0, 1);
-    cfg->in_enabled   = get_int("persist.vendor.clarifae.in_enabled",   "persist.clarifae.in_enabled",   "persist.sys.clarifae.in_enabled",   1, 0, 1);
-    cfg->out_enabled  = get_int("persist.vendor.clarifae.out_enabled",  "persist.clarifae.out_enabled",  "persist.sys.clarifae.out_enabled",  0, 0, 1);
-    cfg->mode         = get_int("persist.vendor.clarifae.mode",         "persist.clarifae.mode",         "persist.sys.clarifae.mode",         1, 1, 3);
-    cfg->strength     = get_int("persist.vendor.clarifae.strength",     "persist.clarifae.strength",     "persist.sys.clarifae.strength",     70, 0, 100);
-    cfg->out_strength = get_int("persist.vendor.clarifae.out_strength", "persist.clarifae.out_strength", "persist.sys.clarifae.out_strength", 50, 0, 100);
-    cfg->atten_db     = get_int("persist.vendor.clarifae.atten_db",     "persist.clarifae.atten_db",     "persist.sys.clarifae.atten_db",     24, 0, 60);
-    cfg->vad          = get_int("persist.vendor.clarifae.vad",          "persist.clarifae.vad",          "persist.sys.clarifae.vad",          50, 0, 100);
-    cfg->highpass     = get_int("persist.vendor.clarifae.highpass",     "persist.clarifae.highpass",     "persist.sys.clarifae.highpass",     1, 0, 1);
-    cfg->autogain     = get_int("persist.vendor.clarifae.autogain",     "persist.clarifae.autogain",     "persist.sys.clarifae.autogain",     0, 0, 1);
-    cfg->loglevel     = get_int("persist.vendor.clarifae.loglevel",     "persist.clarifae.loglevel",     "persist.sys.clarifae.loglevel",     1, 0, 3);
+    cfg->enabled      = get_int("persist.sys.clarifae.enabled",      "persist.vendor.clarifae.enabled",      "persist.clarifae.enabled",      1, 0, 1);
+    cfg->in_enabled   = get_int("persist.sys.clarifae.in_enabled",   "persist.vendor.clarifae.in_enabled",   "persist.clarifae.in_enabled",   1, 0, 1);
+    cfg->out_enabled  = get_int("persist.sys.clarifae.out_enabled",  "persist.vendor.clarifae.out_enabled",  "persist.clarifae.out_enabled",  0, 0, 1);
+    cfg->mode         = get_int("persist.sys.clarifae.mode",         "persist.vendor.clarifae.mode",         "persist.clarifae.mode",         1, 1, 3);
+    cfg->strength     = get_int("persist.sys.clarifae.strength",     "persist.vendor.clarifae.strength",     "persist.clarifae.strength",     70, 0, 100);
+    cfg->out_strength = get_int("persist.sys.clarifae.out_strength", "persist.vendor.clarifae.out_strength", "persist.clarifae.out_strength", 50, 0, 100);
+    cfg->atten_db     = get_int("persist.sys.clarifae.atten_db",     "persist.vendor.clarifae.atten_db",     "persist.clarifae.atten_db",     24, 0, 60);
+    cfg->vad          = get_int("persist.sys.clarifae.vad",          "persist.vendor.clarifae.vad",          "persist.clarifae.vad",          50, 0, 100);
+    cfg->highpass     = get_int("persist.sys.clarifae.highpass",     "persist.vendor.clarifae.highpass",     "persist.clarifae.highpass",     1, 0, 1);
+    cfg->autogain     = get_int("persist.sys.clarifae.autogain",     "persist.vendor.clarifae.autogain",     "persist.clarifae.autogain",     0, 0, 1);
+    cfg->loglevel     = get_int("persist.sys.clarifae.loglevel",     "persist.vendor.clarifae.loglevel",     "persist.clarifae.loglevel",     1, 0, 3);
 
-    get_str("persist.vendor.clarifae.targets", "persist.clarifae.targets", "persist.sys.clarifae.targets",
+    get_str("persist.sys.clarifae.targets", "persist.vendor.clarifae.targets", "persist.clarifae.targets",
             cfg->targets, (int)sizeof(cfg->targets), "mic,voice_comm,camcorder,voice_rec");
-    get_str("persist.vendor.clarifae.out_targets", "persist.clarifae.out_targets", "persist.sys.clarifae.out_targets",
+    get_str("persist.sys.clarifae.out_targets", "persist.vendor.clarifae.out_targets", "persist.clarifae.out_targets",
             cfg->out_targets, (int)sizeof(cfg->out_targets), "music,voice_call");
 
     clarifae_log_level = cfg->loglevel;

@@ -4,7 +4,9 @@
 set_prop(hal_audio_default, vendor_dual_audio_prop)
 get_prop(hal_audio_default, vendor_dual_audio_prop)
 
-# Allow system apps (Settings) to get dual audio properties
+# Allow system apps (Settings) to get and set dual audio properties
+typeattribute system_app system_writes_vendor_properties_violators;
+set_prop(system_app, vendor_dual_audio_prop)
 get_prop(system_app, vendor_dual_audio_prop)
 
 # Allow system_server and audioserver to get dual audio properties

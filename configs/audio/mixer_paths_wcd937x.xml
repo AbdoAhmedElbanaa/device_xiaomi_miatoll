@@ -2834,9 +2834,34 @@
 
     <!-- Dual Audio Custom Paths -->
     <path name="dual-audio-on">
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia1" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia2" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia3" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia4" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia5" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia7" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia8" value="1" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia10" value="1" />
+        <ctl name="RX_MACRO RX0 MUX" value="AIF1_PB" />
+        <ctl name="RX_CDC_DMA_RX_0 Channels" value="One" />
+        <ctl name="RX INT0_1 MIX1 INP0" value="RX0" />
+        <ctl name="RX INT0 DEM MUX" value="CLSH_DSM_OUT" />
         <ctl name="EAR_RDAC Switch" value="1" />
         <ctl name="RDAC3_MUX" value="RX1" />
         <ctl name="RX_EAR Mode" value="ON" />
+    </path>
+
+    <path name="dual-audio-off">
+        <ctl name="EAR_RDAC Switch" value="0" />
+        <ctl name="RX_EAR Mode" value="OFF" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia1" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia2" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia3" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia4" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia5" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia7" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia8" value="0" />
+        <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia10" value="0" />
     </path>
 
     <!-- Dual Audio Presets -->
