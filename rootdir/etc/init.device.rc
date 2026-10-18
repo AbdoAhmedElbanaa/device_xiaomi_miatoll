@@ -20,6 +20,11 @@ on post-fs-data && property:ro.boot.product.hardware.sku=nfc
     mkdir /data/vendor/nfc 0770 nfc nfc
     mkdir /data/vendor/nfc/param 0770 nfc nfc
 
+on post-fs-data
+    mkdir /data/misc/clarifae 0775 system system
+    mkdir /data/vendor/clarifae 0775 audioserver audio
+    mkdir /data/misc/dualaudio 0775 system system
+
 # Set Attestation props for each miatoll device
 on property:ro.boot.hwname=curtana && property:ro.boot.hwc=India
     setprop ro.product.manufacturer_for_attestation Xiaomi
@@ -55,3 +60,17 @@ on property:ro.boot.hwname=gram
     setprop ro.product.device_for_attestation gram
     setprop ro.product.name_for_attestation "POCO M2 Pro"
     setprop ro.product.model_for_attestation "POCO M2 Pro"
+
+service dualaudio-ctl /vendor/bin/dualaudio-ctl boot
+    class late_start
+    user root
+    group root audio system
+    oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start dualaudio-ctl
+
+on property:sys.dualaudio.apply=1
+    exec_background - root audio system -- /vendor/bin/dualaudio-ctl apply
+    setprop sys.dualaudio.apply 0

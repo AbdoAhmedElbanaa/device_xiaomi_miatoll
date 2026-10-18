@@ -38,6 +38,12 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     libvolumelistener \
     libclarifae \
+    clarifae-ctl \
+    clarifae_config.conf \
+    Clarifae \
+    dualaudio-ctl \
+    dualaudio_config.conf \
+    DualAudio \
     sound_trigger.primary.atoll:32 \
     tinymix
 

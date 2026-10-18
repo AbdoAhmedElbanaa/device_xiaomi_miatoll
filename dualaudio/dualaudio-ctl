@@ -1,0 +1,436 @@
+#!/system/bin/sh
+#
+# Copyright (C) 2026 The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+# dualaudio-ctl — Dual Audio (Stereo Speaker / Earpiece) Hardware Controller for Miatoll
+# Controls ALSA mixer routing via tinymix and manages /data/misc/dualaudio/config.conf
+#
+
+CONF_DIR="/data/misc/dualaudio"
+CONF_FILE="$CONF_DIR/config.conf"
+VENDOR_CONF="/vendor/etc/dualaudio/config.conf"
+LOG_FILE="$CONF_DIR/dualaudio.log"
+
+# Locate tinymix binary
+if [ -x "/vendor/bin/tinymix" ]; then
+    TINYMIX="/vendor/bin/tinymix"
+elif [ -x "/system/bin/tinymix" ]; then
+    TINYMIX="/system/bin/tinymix"
+else
+    TINYMIX="tinymix"
+fi
+
+log() {
+    local msg="[$(date '+%Y-%m-%d %H:%M:%S')] $*"
+    echo "$msg"
+    if [ -d "$CONF_DIR" ]; then
+        echo "$msg" >> "$LOG_FILE" 2>/dev/null
+    fi
+}
+
+run_mix() {
+    # Try card 0 first, fallback to default
+    "$TINYMIX" -D 0 "$@" 2>/dev/null || "$TINYMIX" "$@" 2>/dev/null
+}
+
+get_mix() {
+    "$TINYMIX" -D 0 "$1" 2>/dev/null || "$TINYMIX" "$1" 2>/dev/null
+}
+
+init_config() {
+    if [ ! -d "$CONF_DIR" ]; then
+        mkdir -p "$CONF_DIR" 2>/dev/null
+        chmod 0775 "$CONF_DIR" 2>/dev/null
+        chown system:system "$CONF_DIR" 2>/dev/null
+    fi
+
+    if [ ! -f "$CONF_FILE" ]; then
+        if [ -f "$VENDOR_CONF" ]; then
+            cp "$VENDOR_CONF" "$CONF_FILE" 2>/dev/null
+        else
+            cat << 'EOF' > "$CONF_FILE"
+# Dual Audio Configuration for Xiaomi Miatoll
+enabled=0
+preset=balanced
+ear_gain=3
+balance=balanced
+EOF
+        fi
+        chmod 0664 "$CONF_FILE" 2>/dev/null
+        chown system:system "$CONF_FILE" 2>/dev/null
+        log "Initialized new default config at $CONF_FILE"
+    fi
+}
+
+conf_get() {
+    local key="$1"
+    init_config
+    local val
+    val="$(grep -E "^${key}=" "$CONF_FILE" 2>/dev/null | tail -n 1 | cut -d'=' -f2- | tr -d '\r\n ')"
+    echo "$val"
+}
+
+conf_set() {
+    local key="$1"
+    local val="$2"
+    init_config
+    if grep -q -E "^${key}=" "$CONF_FILE" 2>/dev/null; then
+        sed -i "s|^${key}=.*|${key}=${val}|g" "$CONF_FILE" 2>/dev/null
+    else
+        echo "${key}=${val}" >> "$CONF_FILE"
+    fi
+}
+
+sync_props() {
+    local en="$1"
+    local pr="$2"
+    local ga="$3"
+    local ba="$4"
+
+    [ -n "$en" ] && {
+        setprop persist.sys.audio.dual_audio "$en" 2>/dev/null
+        setprop persist.vendor.audio.dual_audio "$en" 2>/dev/null
+        setprop persist.audio.dual_audio "$en" 2>/dev/null
+    }
+    [ -n "$pr" ] && {
+        setprop persist.sys.audio.dual_audio_preset "$pr" 2>/dev/null
+        setprop persist.vendor.audio.dual_audio_preset "$pr" 2>/dev/null
+        setprop persist.audio.dual_audio_preset "$pr" 2>/dev/null
+    }
+    [ -n "$ga" ] && {
+        setprop persist.sys.audio.dual_audio_ear_gain "$ga" 2>/dev/null
+        setprop persist.vendor.audio.dual_audio_ear_gain "$ga" 2>/dev/null
+        setprop persist.audio.dual_audio_ear_gain "$ga" 2>/dev/null
+    }
+    [ -n "$ba" ] && {
+        setprop persist.sys.audio.dual_audio_balance "$ba" 2>/dev/null
+        setprop persist.vendor.audio.dual_audio_balance "$ba" 2>/dev/null
+        setprop persist.audio.dual_audio_balance "$ba" 2>/dev/null
+    }
+}
+
+apply_earpiece_routing_on() {
+    log "Enabling earpiece ALSA mixer routing..."
+    # Connect MultiMedia playback streams to RX_CDC_DMA_RX_0 (Earpiece RX)
+    for mm in 1 2 3 4 5 7 8 10; do
+        run_mix "RX_CDC_DMA_RX_0 Audio Mixer MultiMedia$mm" 1
+    done
+
+    run_mix "RX_MACRO RX0 MUX" "AIF1_PB"
+    run_mix "RX_CDC_DMA_RX_0 Channels" "One"
+    run_mix "RX INT0_1 MIX1 INP0" "RX0"
+    run_mix "RX INT0 DEM MUX" "CLSH_DSM_OUT"
+    run_mix "EAR_RDAC Switch" 1
+    run_mix "RDAC3_MUX" "RX1"
+    run_mix "RX_EAR Mode" "ON"
+}
+
+apply_earpiece_routing_off() {
+    log "Disabling earpiece ALSA mixer routing..."
+    run_mix "EAR_RDAC Switch" 0
+    run_mix "RX_EAR Mode" "OFF"
+
+    for mm in 1 2 3 4 5 7 8 10; do
+        run_mix "RX_CDC_DMA_RX_0 Audio Mixer MultiMedia$mm" 0
+    done
+
+    # Reset digital volume and PA gain to default safe levels
+    run_mix "EAR SPKR PA Gain" "G_DEFAULT"
+    run_mix "RX_RX0 Digital Volume" 84
+    run_mix "RX_RX1 Digital Volume" 84
+    run_mix "WSA_RX0 Digital Volume" 84
+    run_mix "WSA_RX1 Digital Volume" 84
+}
+
+apply_gain() {
+    local gain="$1"
+    local gain_val="G_3_DB"
+    case "$gain" in
+        0) gain_val="G_DEFAULT" ;;
+        1) gain_val="G_1_DB" ;;
+        2) gain_val="G_2_DB" ;;
+        3) gain_val="G_3_DB" ;;
+        4) gain_val="G_4_DB" ;;
+        5) gain_val="G_5_DB" ;;
+        6) gain_val="G_6_DB" ;;
+        *) gain_val="G_3_DB" ;;
+    esac
+    log "Setting EAR SPKR PA Gain to $gain_val (level $gain)"
+    run_mix "EAR SPKR PA Gain" "$gain_val"
+}
+
+apply_balance() {
+    local bal="$1"
+    case "$bal" in
+        top)
+            log "Setting balance to TOP (Earpiece boosted)"
+            run_mix "WSA_RX0 Digital Volume" 80
+            run_mix "WSA_RX1 Digital Volume" 80
+            run_mix "RX_RX0 Digital Volume" 88
+            run_mix "RX_RX1 Digital Volume" 88
+            ;;
+        bottom)
+            log "Setting balance to BOTTOM (Speaker boosted)"
+            run_mix "WSA_RX0 Digital Volume" 88
+            run_mix "WSA_RX1 Digital Volume" 88
+            run_mix "RX_RX0 Digital Volume" 80
+            run_mix "RX_RX1 Digital Volume" 80
+            ;;
+        *)
+            log "Setting balance to BALANCED (50/50)"
+            run_mix "WSA_RX0 Digital Volume" 84
+            run_mix "WSA_RX1 Digital Volume" 84
+            run_mix "RX_RX0 Digital Volume" 84
+            run_mix "RX_RX1 Digital Volume" 84
+            ;;
+    esac
+}
+
+apply_preset() {
+    local preset="$1"
+    log "Applying Dual Audio preset: $preset"
+    case "$preset" in
+        vocal)
+            run_mix "EAR SPKR PA Gain" "G_4_DB"
+            run_mix "RX_RX0 Digital Volume" 86
+            run_mix "RX_RX1 Digital Volume" 86
+            run_mix "WSA_RX0 Digital Volume" 80
+            run_mix "WSA_RX1 Digital Volume" 80
+            ;;
+        dynamic)
+            run_mix "EAR SPKR PA Gain" "G_6_DB"
+            run_mix "RX_RX0 Digital Volume" 88
+            run_mix "RX_RX1 Digital Volume" 88
+            run_mix "WSA_RX0 Digital Volume" 86
+            run_mix "WSA_RX1 Digital Volume" 86
+            ;;
+        bass)
+            run_mix "EAR SPKR PA Gain" "G_1_DB"
+            run_mix "RX_RX0 Digital Volume" 80
+            run_mix "RX_RX1 Digital Volume" 80
+            run_mix "WSA_RX0 Digital Volume" 88
+            run_mix "WSA_RX1 Digital Volume" 88
+            ;;
+        ambient)
+            run_mix "EAR SPKR PA Gain" "G_0_DB"
+            run_mix "RX_RX0 Digital Volume" 78
+            run_mix "RX_RX1 Digital Volume" 78
+            run_mix "WSA_RX0 Digital Volume" 84
+            run_mix "WSA_RX1 Digital Volume" 84
+            ;;
+        custom)
+            local g; g="$(conf_get ear_gain)"
+            local b; b="$(conf_get balance)"
+            [ -z "$g" ] && g=3
+            [ -z "$b" ] && b="balanced"
+            apply_gain "$g"
+            apply_balance "$b"
+            ;;
+        balanced|*)
+            run_mix "EAR SPKR PA Gain" "G_3_DB"
+            run_mix "RX_RX0 Digital Volume" 84
+            run_mix "RX_RX1 Digital Volume" 84
+            run_mix "WSA_RX0 Digital Volume" 84
+            run_mix "WSA_RX1 Digital Volume" 84
+            ;;
+    esac
+}
+
+cmd_apply() {
+    init_config
+    local en; en="$(conf_get enabled)"
+    local pr; pr="$(conf_get preset)"
+    local ga; ga="$(conf_get ear_gain)"
+    local ba; ba="$(conf_get balance)"
+
+    [ -z "$en" ] && en=0
+    [ -z "$pr" ] && pr="balanced"
+    [ -z "$ga" ] && ga=3
+    [ -z "$ba" ] && ba="balanced"
+
+    log "Applying Dual Audio: enabled=$en, preset=$pr, gain=$ga, balance=$ba"
+    sync_props "$en" "$pr" "$ga" "$ba"
+
+    if [ "$en" = "1" ] || [ "$en" = "true" ]; then
+        apply_earpiece_routing_on
+        apply_preset "$pr"
+    else
+        apply_earpiece_routing_off
+    fi
+    echo "applied"
+}
+
+cmd_set() {
+    local k="$1"
+    local v="$2"
+    case "$k" in
+        enabled)
+            conf_set "enabled" "$v"
+            sync_props "$v" "" "" ""
+            if [ "$v" = "1" ] || [ "$v" = "true" ]; then
+                apply_earpiece_routing_on
+                local pr; pr="$(conf_get preset)"
+                [ -z "$pr" ] && pr="balanced"
+                apply_preset "$pr"
+            else
+                apply_earpiece_routing_off
+            fi
+            ;;
+        preset)
+            conf_set "preset" "$v"
+            sync_props "" "$v" "" ""
+            local en; en="$(conf_get enabled)"
+            if [ "$en" = "1" ] || [ "$en" = "true" ]; then
+                apply_preset "$v"
+            fi
+            ;;
+        ear_gain|gain)
+            conf_set "ear_gain" "$v"
+            sync_props "" "" "$v" ""
+            local en; en="$(conf_get enabled)"
+            local pr; pr="$(conf_get preset)"
+            if [ "$en" = "1" ] && [ "$pr" = "custom" ]; then
+                apply_gain "$v"
+            fi
+            ;;
+        balance)
+            conf_set "balance" "$v"
+            sync_props "" "" "" "$v"
+            local en; en="$(conf_get enabled)"
+            local pr; pr="$(conf_get preset)"
+            if [ "$en" = "1" ] && [ "$pr" = "custom" ]; then
+                apply_balance "$v"
+            fi
+            ;;
+        *)
+            echo "Unknown key: $k" >&2
+            return 1
+            ;;
+    esac
+    log "Set $k=$v"
+    echo "$k=$v"
+}
+
+cmd_status() {
+    init_config
+    local en; en="$(conf_get enabled)"
+    local pr; pr="$(conf_get preset)"
+    local ga; ga="$(conf_get ear_gain)"
+    local ba; ba="$(conf_get balance)"
+
+    local r_switch; r_switch="$(get_mix "EAR_RDAC Switch" | awk '{print $NF}')"
+    local r_mode; r_mode="$(get_mix "RX_EAR Mode" | awk '{print $NF}')"
+    local r_gain; r_gain="$(get_mix "EAR SPKR PA Gain" | awk '{print $NF}')"
+
+    echo "=== Dual Audio Hardware Status ==="
+    echo "Config file : $CONF_FILE"
+    echo "Enabled     : $en"
+    echo "Preset      : $pr"
+    echo "PA Gain     : $ga (ALSA: $r_gain)"
+    echo "Balance     : $ba"
+    echo "EAR_RDAC    : $r_switch"
+    echo "RX_EAR Mode : $r_mode"
+    if [ "$r_switch" = "1" ] || [ "$r_switch" = "On" ] || [ "$r_switch" = ">1" ]; then
+        echo "Active      : YES (Hardware Receiver Routed)"
+    else
+        echo "Active      : NO (Single Speaker)"
+    fi
+}
+
+cmd_status_json() {
+    init_config
+    local en; en="$(conf_get enabled)"
+    local pr; pr="$(conf_get preset)"
+    local ga; ga="$(conf_get ear_gain)"
+    local ba; ba="$(conf_get balance)"
+
+    local is_en="false"
+    [ "$en" = "1" ] || [ "$en" = "true" ] && is_en="true"
+
+    local r_switch; r_switch="$(get_mix "EAR_RDAC Switch" | awk '{print $NF}')"
+    local r_gain; r_gain="$(get_mix "EAR SPKR PA Gain" | awk '{print $NF}')"
+
+    printf '{"enabled":%s,"preset":"%s","gain":"%s","balance":"%s","alsa_ear_switch":"%s","alsa_gain":"%s"}\n' \
+        "$is_en" "$pr" "$ga" "$ba" "$r_switch" "$r_gain"
+}
+
+cmd_restart_audio() {
+    log "Restarting audioserver..."
+    command -v killall >/dev/null 2>&1 && killall -9 audioserver 2>/dev/null
+    setprop ctl.restart audioserver 2>/dev/null
+    sleep 1
+    # Re-apply routing after audioserver restarts
+    cmd_apply
+    echo "restarted"
+}
+
+cmd_reset() {
+    init_config
+    cat << 'EOF' > "$CONF_FILE"
+# Dual Audio Configuration for Xiaomi Miatoll
+enabled=0
+preset=balanced
+ear_gain=3
+balance=balanced
+EOF
+    chmod 0664 "$CONF_FILE" 2>/dev/null
+    chown system:system "$CONF_FILE" 2>/dev/null
+    cmd_apply
+    echo "reset"
+}
+
+cmd_log() {
+    echo "=== dualaudio-ctl log ==="
+    if [ -f "$LOG_FILE" ]; then
+        tail -n 60 "$LOG_FILE"
+    else
+        echo "(No dualaudio.log yet)"
+    fi
+    echo ""
+    echo "=== logcat -d -s DualAudio ==="
+    logcat -d -s DualAudio:V DualAudioConfig:V DualAudioController:V | tail -n 60
+}
+
+case "$1" in
+    boot)
+        init_config
+        cmd_apply
+        ;;
+    on)
+        cmd_set enabled 1
+        ;;
+    off)
+        cmd_set enabled 0
+        ;;
+    set)
+        shift
+        cmd_set "$1" "$2"
+        ;;
+    get)
+        shift
+        conf_get "$1"
+        ;;
+    apply)
+        cmd_apply
+        ;;
+    status)
+        cmd_status
+        ;;
+    status-json)
+        cmd_status_json
+        ;;
+    restart-audio)
+        cmd_restart_audio
+        ;;
+    reset)
+        cmd_reset
+        ;;
+    log)
+        cmd_log
+        ;;
+    *)
+        echo "usage: dualaudio-ctl {boot|on|off|set <key> <val>|get <key>|apply|status|status-json|restart-audio|reset|log}"
+        exit 1
+        ;;
+esac

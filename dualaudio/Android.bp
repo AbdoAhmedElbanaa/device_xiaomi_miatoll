@@ -1,0 +1,18 @@
+//
+// Copyright (C) 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+sh_binary {
+    name: "dualaudio-ctl",
+    src: "dualaudio-ctl",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "dualaudio_config.conf",
+    src: "config.conf",
+    sub_dir: "dualaudio",
+    filename: "config.conf",
+    vendor: true,
+}

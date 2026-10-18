@@ -4,11 +4,14 @@
 set_prop(hal_audio_default, vendor_clarifae_prop)
 get_prop(hal_audio_default, vendor_clarifae_prop)
 
-
-# Allow system apps (Settings) to get and set clarifae properties
+# Allow system and platform apps (Settings, Clarifae App) to get and set clarifae properties
 typeattribute system_app system_writes_vendor_properties_violators;
 set_prop(system_app, vendor_clarifae_prop)
 get_prop(system_app, vendor_clarifae_prop)
+
+typeattribute platform_app system_writes_vendor_properties_violators;
+set_prop(platform_app, vendor_clarifae_prop)
+get_prop(platform_app, vendor_clarifae_prop)
 
 # Allow system_server and audioserver to get clarifae properties
 get_prop(system_server, vendor_clarifae_prop)
@@ -16,4 +19,3 @@ get_prop(audioserver, vendor_clarifae_prop)
 
 # Allow vendor_init to set default clarifae properties
 set_prop(vendor_init, vendor_clarifae_prop)
-

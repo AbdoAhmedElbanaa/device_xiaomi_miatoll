@@ -10,6 +10,7 @@ package {
 cc_library_shared {
     name: "libclarifae",
     vendor: true,
+    compile_multilib: "both",
     relative_install_path: "soundfx",
 
     srcs: [
@@ -61,10 +62,29 @@ cc_library_shared {
     ],
 
     arch: {
+        arm: {
+            cflags: [
+                "-mfpu=neon",
+            ],
+        },
         arm64: {
             cflags: [
                 "-march=armv8-a+simd",
             ],
         },
     },
+}
+
+sh_binary {
+    name: "clarifae-ctl",
+    src: "clarifae-ctl",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "clarifae_config.conf",
+    src: "config.conf",
+    sub_dir: "clarifae",
+    filename: "config.conf",
+    vendor: true,
 }
