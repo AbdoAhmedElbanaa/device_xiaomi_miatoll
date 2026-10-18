@@ -256,16 +256,17 @@ static int32_t ce_command(effect_handle_t self, uint32_t cmd, uint32_t cmdSize,
         return 0;
 
     case EFFECT_CMD_SET_CONFIG: {
-        if (!pCmd || cmdSize < sizeof(effect_config_t) ||
-            !replySize || !pReply || *replySize < sizeof(int))
+        if (!pCmd || cmdSize < sizeof(effect_config_t))
             return -EINVAL;
         effect_config_t* ec = (effect_config_t*)pCmd;
         read_buffer_cfg(c, &ec->inputCfg, &ec->outputCfg);
         c->configured = 1;
         clarifae_config_load(&c->cfg);
         int rc = backend_open(c);
-        *(int*)pReply = (rc == 0) ? 0 : rc;
-        return 0;
+        if (replySize && pReply && *replySize >= sizeof(int)) {
+            *(int*)pReply = (rc == 0) ? 0 : rc;
+        }
+        return (rc == 0) ? 0 : rc;
     }
 
     case EFFECT_CMD_GET_CONFIG: {
@@ -305,7 +306,11 @@ static int32_t ce_command(effect_handle_t self, uint32_t cmd, uint32_t cmdSize,
         return 0;
 
     case EFFECT_CMD_GET_PARAM:
-        if (replySize) *replySize = 0;
+        if (replySize && pReply && *replySize >= sizeof(int32_t)) {
+            *(int32_t*)pReply = 0;
+        } else if (replySize) {
+            *replySize = 0;
+        }
         return 0;
 
     case EFFECT_CMD_SET_DEVICE:
@@ -341,6 +346,7 @@ static int32_t lib_create(const effect_uuid_t* uuid, int32_t sessionId,
                           int32_t ioId, effect_handle_t* pHandle) {
     (void)sessionId; (void)ioId;
     if (!pHandle || !uuid) return -EINVAL;
+    *pHandle = NULL;
     int kind = kind_for_uuid(uuid);
     if (kind < 0) return -EINVAL;
 

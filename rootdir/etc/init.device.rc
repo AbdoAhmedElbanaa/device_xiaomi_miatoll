@@ -21,9 +21,8 @@ on post-fs-data && property:ro.boot.product.hardware.sku=nfc
     mkdir /data/vendor/nfc/param 0770 nfc nfc
 
 on post-fs-data
-    mkdir /data/misc/clarifae 0775 system system
-    mkdir /data/vendor/clarifae 0775 audioserver audio
-    mkdir /data/misc/dualaudio 0775 system system
+    mkdir /data/vendor/clarifae 0777 system audio
+    mkdir /data/vendor/dualaudio 0777 system audio
 
 # Set Attestation props for each miatoll device
 on property:ro.boot.hwname=curtana && property:ro.boot.hwc=India

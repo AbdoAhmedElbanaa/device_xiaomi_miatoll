@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # dualaudio-ctl — Dual Audio (Stereo Speaker / Earpiece) Hardware Controller for Miatoll
-# Controls ALSA mixer routing via tinymix and manages /data/misc/dualaudio/config.conf
+# Controls ALSA mixer routing via tinymix and manages /data/data/org.rising.dualaudio/files/config.conf
 #
 
-CONF_DIR="/data/misc/dualaudio"
+CONF_DIR="/data/data/org.rising.dualaudio/files"
 CONF_FILE="$CONF_DIR/config.conf"
 VENDOR_CONF="/vendor/etc/dualaudio/config.conf"
 LOG_FILE="$CONF_DIR/dualaudio.log"
@@ -39,10 +39,24 @@ get_mix() {
 }
 
 init_config() {
+    # Check if app data dir exists, fallback to DE dir if app uses device protected storage
     if [ ! -d "$CONF_DIR" ]; then
-        mkdir -p "$CONF_DIR" 2>/dev/null
-        chmod 0775 "$CONF_DIR" 2>/dev/null
-        chown system:system "$CONF_DIR" 2>/dev/null
+        if [ -d "/data/user_de/0/org.rising.dualaudio/files" ]; then
+            CONF_DIR="/data/user_de/0/org.rising.dualaudio/files"
+            CONF_FILE="$CONF_DIR/config.conf"
+            LOG_FILE="$CONF_DIR/dualaudio.log"
+        else
+            mkdir -p "$CONF_DIR" 2>/dev/null
+            chmod 0777 "$CONF_DIR" 2>/dev/null
+            chown system:system "$CONF_DIR" 2>/dev/null
+        fi
+    fi
+
+    # Ensure Clarifae app directory exists as well
+    if [ ! -d "/data/data/org.rising.clarifae/files" ] && [ ! -d "/data/user_de/0/org.rising.clarifae/files" ]; then
+        mkdir -p "/data/data/org.rising.clarifae/files" 2>/dev/null
+        chmod 0777 "/data/data/org.rising.clarifae/files" 2>/dev/null
+        chown system:system "/data/data/org.rising.clarifae/files" 2>/dev/null
     fi
 
     if [ ! -f "$CONF_FILE" ]; then

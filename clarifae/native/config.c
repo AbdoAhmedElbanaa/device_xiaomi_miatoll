@@ -17,7 +17,8 @@
 int clarifae_log_level = 1;
 
 static const char* const kConfigPaths[] = {
-    "/data/misc/clarifae/config.conf",
+    "/data/data/org.rising.clarifae/files/config.conf",
+    "/data/user_de/0/org.rising.clarifae/files/config.conf",
     "/data/vendor/clarifae/config.conf",
     "/data/adb/clarifae/config.conf",
     "/vendor/etc/clarifae/config.conf",
@@ -100,7 +101,8 @@ static const char* ensure_config_file(void) {
 
     /* If no config file exists anywhere, create one with default settings */
     const char* candidates[] = {
-        "/data/misc/clarifae/config.conf",
+        "/data/data/org.rising.clarifae/files/config.conf",
+        "/data/user_de/0/org.rising.clarifae/files/config.conf",
         "/data/vendor/clarifae/config.conf",
         "/data/adb/clarifae/config.conf",
     };
