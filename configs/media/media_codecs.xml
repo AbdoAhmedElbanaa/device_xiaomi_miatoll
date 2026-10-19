@@ -18,7 +18,7 @@
 <MediaCodecs>
     <Include href="media_codecs_c2.xml" />
     <Settings>
-        <Setting name="max-video-encoder-input-buffers" value="11" />
+        <Setting name="max-video-encoder-input-buffers" value="13" />
         <Domain name="telephony" enabled="true" />
     </Settings>
 </MediaCodecs>
