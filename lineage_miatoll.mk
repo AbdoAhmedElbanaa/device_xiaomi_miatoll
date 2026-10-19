@@ -28,21 +28,26 @@ RISING_MAINTAINER := AbdoElbanaa
 # (Optional if builder is setting properties via init_<device>.cpp)
 PRODUCT_BUILD_PROP_OVERRIDES += \
     RisingChipset="Snapdragon 720G" \
-    RisingMaintainer="AbdoElbanaa"
+    RisingMaintainer="AbdoElbanaa" \
+    DeviceProduct=miatoll
 
 # Disable/enable blur support, false by default
 TARGET_ENABLE_BLUR := true
 
 # Whether to ship aperture camera, false by default
 PRODUCT_NO_CAMERA := false
-
+# RisingOS-Flags
+TORCH_STR_SUPPORTED := true
 # Disable legacy AudioFX in favor of RisingFX
 TARGET_EXCLUDES_AUDIOFX := true
-
+# Addons
+TARGET_HAS_UDFPS := false
 # GMS Flags
 # GMS build flags, true by default
 # Ship with GMS packages, replaces default AOSP packages with Google manufactured packages.
 WITH_GMS := true
+TARGET_CORE_GMS := true
+TARGET_CORE_GMS_EXTRAS := true
 
 # VINTF Kernel Requirements (non-GKI custom kernel)
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
