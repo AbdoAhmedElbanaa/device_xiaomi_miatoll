@@ -69,6 +69,11 @@ service dualaudio-ctl /vendor/bin/dualaudio-ctl boot
 
 on property:sys.boot_completed=1
     start dualaudio-ctl
+    # Enable Fast Charge mode on boot
+    write /sys/class/power_supply/battery/fastcharge_mode 1
+    write /sys/class/power_supply/usb/fastcharge_mode 1
+    write /sys/class/power_supply/bms/fastcharge_mode 1
+    write /sys/class/power_supply/battery/constant_charge_current_max 3500000
 
 on property:sys.dualaudio.apply=1
     exec_background - root audio system -- /vendor/bin/dualaudio-ctl apply
