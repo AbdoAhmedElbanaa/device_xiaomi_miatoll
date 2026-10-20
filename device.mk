@@ -384,5 +384,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink
 
+# MiuiCamera
+$(call inherit-product-if-exists, device/xiaomi/miuicamera-miatoll/device.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/miuicamera-miatoll/miuicamera-miatoll-vendor.mk)
+
+# VINTF
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
 # Inherit proprietary targets
 $(call inherit-product, vendor/xiaomi/miatoll/miatoll-vendor.mk)

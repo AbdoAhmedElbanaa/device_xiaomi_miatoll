@@ -4,4 +4,5 @@
 #
 
 PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/lineage_miatoll.mk \
     $(LOCAL_DIR)/custom_miatoll.mk
