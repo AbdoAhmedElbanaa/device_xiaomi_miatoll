@@ -150,6 +150,10 @@ PRODUCT_PACKAGES += \
 # Kernel
 PRODUCT_ENABLE_UFFD_GC := true
 
+# Libshims
+PRODUCT_PACKAGES += \
+    fakelogprint
+
 # Lineage Health
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
