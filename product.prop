@@ -52,10 +52,16 @@ persist.device_config.content_capture.content_capture_service_explicitly_enabled
 persist.device_config.content_capture.package_name_allowlist=com.google.android.as
 
 # =============================================================================
-# HearingHealth / LoudSoundAlerts — DISABLED
-# Requires ambient audio hardware sensor not present on miatoll (SM6250).
-# Enabling it causes AiAi to crash with NoSuchElementException at boot.
+# HearingHealth / LoudSoundAlerts — ENABLED (Software-based via AudioRecord)
+# miatoll (SM6250) has microphone + audio.effect HAL + SoundTrigger HAL.
+# HearingHealth__hearing_protection_on_device=true tells AiAi to use software
+# AudioRecord-based detection (NOT Pixel ambient DSP) → no crash on boot.
+# The previous crash was Optional.get() on null config_systemAmbientAudioIntelligence
+# which is now properly set in config.xml.
 # =============================================================================
-persist.device_config.adaptive_audio.HearingHealth__enable_loud_sound_alerts=false
-persist.device_config.device_personalization_services.HearingHealth__enable_loud_sound_alerts=false
-persist.device_config.device_personalization_services.EchoSmartspace__enable_loud_sound_alert=false
+persist.device_config.adaptive_audio.HearingHealth__enable_loud_sound_alerts=true
+persist.device_config.device_personalization_services.HearingHealth__enable_loud_sound_alerts=true
+persist.device_config.device_personalization_services.HearingHealth__on_device_enabled=true
+persist.device_config.device_personalization_services.HearingHealth__hearing_protection_on_device=true
+persist.device_config.device_personalization_services.EchoSmartspace__enable_loud_sound_alert=true
+persist.device_config.device_personalization_services.EchoSmartspace__loud_sound_snooze_duration_minutes=30
