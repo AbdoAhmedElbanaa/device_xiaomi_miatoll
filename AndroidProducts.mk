@@ -4,4 +4,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/clover_miatoll.mk
+    $(LOCAL_DIR)/aosp_miatoll.mk
