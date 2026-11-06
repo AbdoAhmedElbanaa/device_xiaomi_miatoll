@@ -172,6 +172,10 @@ PRODUCT_PACKAGES += \
 
 $(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
 
+# Libshims
+PRODUCT_PACKAGES += \
+    fakelogprint
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light-service.lineage
