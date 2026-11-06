@@ -19,3 +19,43 @@ ro.bpf.kver_override=5.10.239
 
 # IMS
 ro.telephony.block_binder_thread_on_incoming_calls=false
+
+# =============================================================================
+# Google Android Intelligence (AiAi) — Notification & AI Features
+# =============================================================================
+
+# Notification Assistant: AiAi handles notification organization, bundling,
+# summarization, smart replies, and contextual actions
+persist.sys.notification_assistant=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService
+persist.device_config.notification.assistant_enabled=true
+persist.device_config.notification.summarization_enabled=true
+persist.device_config.notification.bundles_enabled=true
+persist.device_config.notifications.nm_contextual_display=true
+persist.device_config.notifications.nm_contextual_display_launch=true
+persist.device_config.notifications.nm_insights=true
+
+# =============================================================================
+# Live Translate in-app bar (UI Translation)
+# Enables the translation bar that appears inside apps when user activates
+# Live Translate — powered by ContentCapture + AiAiTranslationService
+# =============================================================================
+persist.device_config.device_personalization_services.Translate__app_ui_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__live_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__translation_ui_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_ui_translation=true
+
+# =============================================================================
+# Android Intelligence — ContentCapture & Translation integration
+# Required for Live Translate, Clipboard AI, and Smart Text Selection
+# =============================================================================
+persist.device_config.content_capture.content_capture_service_explicitly_enabled=true
+persist.device_config.content_capture.package_name_allowlist=com.google.android.as
+
+# =============================================================================
+# HearingHealth / LoudSoundAlerts — DISABLED
+# Requires ambient audio hardware sensor not present on miatoll (SM6250).
+# Enabling it causes AiAi to crash with NoSuchElementException at boot.
+# =============================================================================
+persist.device_config.adaptive_audio.HearingHealth__enable_loud_sound_alerts=false
+persist.device_config.device_personalization_services.HearingHealth__enable_loud_sound_alerts=false
+persist.device_config.device_personalization_services.EchoSmartspace__enable_loud_sound_alert=false
