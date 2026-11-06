@@ -559,14 +559,6 @@
     <string name="config_systemUiIntelligence" translatable="false">com.google.android.as</string>
     <string name="config_systemVisualIntelligence" translatable="false">com.google.android.as</string>
 
-    <!-- Audio Intelligence: AiAi handles ambient audio monitoring and HearingHealth.
-         The LoudSoundAlertsBackgroundService crash was caused by Optional.get() on a
-         null config — fixed by BOTH setting these configs AND adding phenotype flag
-         HearingHealth__hearing_protection_on_device=true in product.prop which tells
-         AiAi to use software-based (microphone AudioRecord) detection, not Pixel DSP. -->
-    <string name="config_systemAudioIntelligence" translatable="false">com.google.android.as</string>
-    <string name="config_systemAmbientAudioIntelligence" translatable="false">com.google.android.as</string>
-
     <!-- Text Classifier -->
     <string name="config_defaultTextClassifierPackage" translatable="false">com.google.android.as</string>
 
