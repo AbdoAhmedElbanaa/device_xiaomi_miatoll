@@ -52,6 +52,8 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 # Inherit from miatoll device
 $(call inherit-product, device/xiaomi/miatoll/atoll.mk)
 
+-include vendor/lineage-priv/keys/keys.mk
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080

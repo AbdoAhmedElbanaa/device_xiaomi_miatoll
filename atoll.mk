@@ -80,6 +80,22 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/miuicamera/miuicamera-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/miuicamera-hiddenapi-package-allowlist.xml \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/miuicamera/lib/arm64,$(TARGET_COPY_OUT_SYSTEM)/priv-app/MiuiCamera/lib/arm64)
 
+# Gallery (MiuiGallery & MiuiGalleryEditor)
+PRODUCT_PACKAGES += \
+    MiuiGallery \
+    MiuiGalleryEditor
+
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    MiuiGallery \
+    MiuiGalleryEditor
+
+# Gallery (MiuiGallery & MiuiGalleryEditor permissions, sysconfig & JNI libs)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/miuigallery/privapp-permissions-miuigallery.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-miuigallery.xml \
+    $(LOCAL_PATH)/miuigallery/miuigallery-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/miuigallery-hiddenapi-package-allowlist.xml \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/miuigallery/lib/MiuiGallery/arm64,$(TARGET_COPY_OUT_SYSTEM)/priv-app/MiuiGallery/lib/arm64) \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/miuigallery/lib/MiuiGalleryEditor/arm64,$(TARGET_COPY_OUT_SYSTEM)/priv-app/MiuiGalleryEditor/lib/arm64)
+
 # DebugFS
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 
@@ -334,6 +350,8 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/google/pixel/thermal \
     hardware/lineage/interfaces/power-libperfmgr \
     hardware/qcom-caf/common/libqti-perfd-client \
+    hardware/qcom-caf/wlan \
+    hardware/qcom-caf/wlan/qcwcn \
     hardware/xiaomi
 
 # Spatial Audio

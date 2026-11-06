@@ -1,0 +1,56 @@
+//
+// Copyright (C) 2024-2026 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// Rule to merge MiuiGallery.apk parts into a single APK
+genrule {
+    name: "merge_miui_gallery",
+    srcs: [
+        "MiuiGallery.apk00",
+        "MiuiGallery.apk01",
+    ],
+    out: ["MiuiGallery.apk"],
+    cmd: "cat $(in) > $(out)",
+}
+
+// Import MiuiGallery as an Android prebuilt application
+android_app_import {
+    name: "MiuiGallery",
+    apk: ":merge_miui_gallery",
+    certificate: "platform",
+    overrides: [
+        "Gallery2",
+    ],
+    owner: "xiaomi",
+    privileged: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+// Rule to merge MiuiGalleryEditor.apk parts into a single APK
+genrule {
+    name: "merge_miui_gallery_editor",
+    srcs: [
+        "MiuiGalleryEditor.apk00",
+        "MiuiGalleryEditor.apk01",
+        "MiuiGalleryEditor.apk02",
+        "MiuiGalleryEditor.apk03",
+    ],
+    out: ["MiuiGalleryEditor.apk"],
+    cmd: "cat $(in) > $(out)",
+}
+
+// Import MiuiGalleryEditor as an Android prebuilt application
+android_app_import {
+    name: "MiuiGalleryEditor",
+    apk: ":merge_miui_gallery_editor",
+    certificate: "platform",
+    owner: "xiaomi",
+    privileged: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
