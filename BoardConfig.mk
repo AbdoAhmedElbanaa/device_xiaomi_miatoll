@@ -210,4 +210,5 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit proprietary blobs
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 include vendor/xiaomi/miatoll/BoardConfigVendor.mk

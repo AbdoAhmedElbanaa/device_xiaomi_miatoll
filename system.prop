@@ -63,6 +63,8 @@ vendor.mm.enable.qcom_parser=16777199
 # MiuiCamera
 ro.miui.build.region=in
 ro.miui.notch=1
+ro.miui.ui.version.code=816
+ro.miui.ui.version.name=V816
 ro.product.mod_device=_global
 
 # Phantom process monitoring

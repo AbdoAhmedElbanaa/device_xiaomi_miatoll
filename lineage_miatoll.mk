@@ -24,7 +24,7 @@ RISING_STORAGE := 64GB/128GB
 TARGET_ENABLE_BLUR := true
 
 # Whether to skip shipping Aperture camera (MiuiCamera is shipped by default)
-PRODUCT_NO_CAMERA := false
+PRODUCT_NO_CAMERA := true
 
 # Torch strength control support
 TORCH_STR_SUPPORTED := true

@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permissions>
+    <!-- Permissions for MiuiCamera (Leica v5) -->
     <privapp-permissions package="com.android.camera">
+        <permission name="android.permission.CONTROL_DEVICE_STATE"/>
+        <permission name="android.permission.CONTROL_DISPLAY_BRIGHTNESS"/>
+        <permission name="android.permission.DEVICE_POWER"/>
+        <permission name="android.permission.DUMP"/>
+        <permission name="android.permission.INJECT_EVENTS"/>
         <permission name="android.permission.INTERACT_ACROSS_USERS"/>
+        <permission name="android.permission.LOG_COMPAT_CHANGE"/>
+        <permission name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+        <permission name="android.permission.MANAGE_USB"/>
+        <permission name="android.permission.PACKAGE_USAGE_STATS"/>
+        <permission name="android.permission.READ_COMPAT_CHANGE_CONFIG"/>
+        <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
+        <permission name="android.permission.START_TASKS_FROM_RECENTS"/>
+        <permission name="android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE"/>
+        <permission name="android.permission.SYSTEM_ALERT_WINDOW"/>
+        <permission name="android.permission.SYSTEM_CAMERA"/>
+        <permission name="android.permission.TURN_SCREEN_ON"/>
         <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
         <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
-        <permission name="android.permission.PACKAGE_USAGE_STATS"/>
+        <permission name="android.permission.WRITE_SETTINGS"/>
         <permission name="mediatek.permission.ACCESS_APU_SYS"/>
-        <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
-        <permission name="android.permission.SYSTEM_CAMERA"/>
-        <permission name="android.permission.LOG_COMPAT_CHANGE" />
-        <permission name="android.permission.READ_COMPAT_CHANGE_CONFIG" />
-        <permission name="android.permission.CONTROL_DEVICE_STATE" />
     </privapp-permissions>
+
+    <!-- Permissions for MiuiExtraPhoto -->
     <privapp-permissions package="com.miui.extraphoto">
+        <permission name="android.permission.ACCESS_ALL_EXTERNAL_STORAGE"/>
+        <permission name="android.permission.ACCESS_MEDIA_LOCATION"/>
+        <permission name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+        <permission name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <permission name="android.permission.READ_MEDIA_AUDIO"/>
+        <permission name="android.permission.READ_MEDIA_IMAGES"/>
+        <permission name="android.permission.READ_MEDIA_VIDEO"/>
+        <permission name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <permission name="android.permission.WRITE_MEDIA_AUDIO"/>
+        <permission name="android.permission.WRITE_MEDIA_IMAGES"/>
         <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
+        <permission name="android.permission.WRITE_MEDIA_VIDEO"/>
     </privapp-permissions>
 </permissions>
