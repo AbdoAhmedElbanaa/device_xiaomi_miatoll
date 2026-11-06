@@ -183,9 +183,7 @@ PRODUCT_PACKAGES += \
     android.hardware.ir-service.example
 
 # Kernel
-TARGET_KERNEL_DIR ?= $(LOCAL_PATH)/prebuilt-kernel
-LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.gz
-PRODUCT_COPY_FILES += $(LOCAL_KERNEL):kernel
+# Built from source (kernel/xiaomi/sm6250)
 
 # Lineage Health
 PRODUCT_PACKAGES += \
