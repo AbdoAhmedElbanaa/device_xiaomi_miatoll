@@ -19,6 +19,8 @@ $(call inherit-product, device/xiaomi/miatoll/atoll.mk)
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
 
+TORCH_STR_SUPPORTED := true
+
 PRODUCT_NAME := lineage_miatoll
 PRODUCT_DEVICE := miatoll
 PRODUCT_MANUFACTURER := Xiaomi
