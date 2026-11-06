@@ -105,6 +105,9 @@ $(call inherit-product, vendor/dolby/dolby-setup.mk)
 # Dolby Vision
 TARGET_SUPPORTS_DOVI := true
 
+# AxionFx
+TARGET_INCLUDE_AXFX := true
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
