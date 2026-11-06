@@ -166,9 +166,21 @@ TARGET_KERNEL_DIR ?= $(LOCAL_PATH)/prebuilt-kernel
 LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.gz
 PRODUCT_COPY_FILES += $(LOCAL_KERNEL):kernel
 
+# Lineage Health
+PRODUCT_PACKAGES += \
+    vendor.lineage.health-service.default
+
+$(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light-service.lineage
+
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay-service.sdm
+
+$(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -202,6 +214,11 @@ PRODUCT_PACKAGES += \
     SM6250SystemUI \
     TelephonyResCommon \
     WifiOverlay
+
+PRODUCT_PACKAGES += \
+    SM6250Aperture \
+    SM6250LineageDialer \
+    SM6250LineageSDK
 
 # Partitions
 PRODUCT_PACKAGES += \
