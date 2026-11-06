@@ -54,7 +54,6 @@ lib_fixups: lib_fixups_user_type = {
         'libarcsoft_dualcam_refocus_rear_w',
         'libarcsoft_portrait_lighting',
         'libarcsoft_portrait_lighting_c',
-        'libmegface',
     ): lib_fixup_vendor_suffix,
 }
 

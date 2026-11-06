@@ -374,7 +374,7 @@ vendor/lib64/camera/com.qti.tuned.ofilm_s5kgw1.bin
 # Camera megvii
 vendor/etc/camera/megviifacepp_0_5_2_model
 vendor/lib64/libMegviiFacepp-0.5.2.so
-vendor/lib64/libmegface.so;MODULE_SUFFIX=_vendor
+vendor/lib64/libmegface.so
 
 # CDSP
 vendor/bin/cdsprpcd
