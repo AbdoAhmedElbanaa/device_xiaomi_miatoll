@@ -33,6 +33,14 @@ persist.device_config.notification.bundles_enabled=true
 persist.device_config.notifications.nm_contextual_display=true
 persist.device_config.notifications.nm_contextual_display_launch=true
 persist.device_config.notifications.nm_insights=true
+persist.device_config.device_personalization_services.Notifications__notification_assistant_enabled=true
+persist.device_config.device_personalization_services.Notifications__enable_smart_replies=true
+persist.device_config.device_personalization_services.Notifications__enable_actions=true
+persist.device_config.device_personalization_services.Notifications__enable_importance_ranking=true
+persist.device_config.device_personalization_services.Notifications__enable_notification_summaries=true
+persist.device_config.device_personalization_services.Notifications__enable_dynamic_bundling=true
+persist.device_config.device_personalization_services.Notifications__enable_conversation_detection=true
+persist.device_config.systemui.notification_smart_reply_enabled=true
 
 # =============================================================================
 # Live Translate in-app bar (UI Translation)

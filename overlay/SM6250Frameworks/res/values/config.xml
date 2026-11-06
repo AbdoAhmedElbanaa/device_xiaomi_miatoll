@@ -598,7 +598,7 @@
     <string name="config_defaultWallpaperEffectsGenerationService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.wallpapereffects.AiAiWallpaperEffectsGenerationService</string>
 
     <!-- Notification Listener Access for Google apps -->
-    <string name="config_defaultListenerAccessPackages" translatable="false">com.google.android.apps.nexuslauncher:com.google.android.setupwizard:com.google.android.apps.pixelmigrate:com.google.android.as:com.google.android.projection.gearhead:com.google.pixel.exo:com.google.android.odad</string>
+    <string name="config_defaultListenerAccessPackages" translatable="false">com.google.android.apps.nexuslauncher:com.google.android.setupwizard:com.google.android.apps.pixelmigrate:com.google.android.as:com.google.android.projection.gearhead:com.google.pixel.exo:com.google.android.odad:com.google.ambient.streaming:com.google.android.apps.wear.companion</string>
 
     <!-- DND Access for Google system apps -->
     <string name="config_defaultDndAccessPackages" translatable="false">com.google.android.GoogleCamera:com.google.android.gms:com.google.intelligence.sense:com.google.android.settings.intelligence:com.google.android.apps.wellbeing:com.google.android.apps.safetyhub:com.google.android.dialer:com.google.android.apps.diagnosticstool</string>
@@ -606,5 +606,11 @@
     <!-- Support ALL notification assistant features:
          Bundling, Summarization, Organizer, Smart Reply — none disabled -->
     <string-array translatable="false" name="config_notificationDefaultUnsupportedAdjustments" />
+
+    <!-- Google Pixel Notification Experience -->
+    <bool name="config_notificationBadging">true</bool>
+    <bool name="config_notificationHeaderClickableForExpand">true</bool>
+    <bool name="config_notificationCloseButtonSupported">true</bool>
+    <bool name="config_enablePersonalContextManagerService">true</bool>
 
 </resources>
