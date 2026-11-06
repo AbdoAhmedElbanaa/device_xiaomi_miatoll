@@ -43,14 +43,27 @@ persist.device_config.device_personalization_services.Notifications__enable_conv
 persist.device_config.systemui.notification_smart_reply_enabled=true
 
 # =============================================================================
-# Live Translate in-app bar (UI Translation)
-# Enables the translation bar that appears inside apps when user activates
-# Live Translate — powered by ContentCapture + AiAiTranslationService
+# Live Translate in-app bar (UI Translation) & Model Download
+# Enables the translation bar / floating chip that appears inside apps when user activates
+# Live Translate — powered by ContentCapture + AiAiTranslationService + Astrea
 # =============================================================================
 persist.device_config.device_personalization_services.Translate__app_ui_translate_enabled=true
 persist.device_config.device_personalization_services.Translate__live_translate_enabled=true
 persist.device_config.device_personalization_services.Translate__translation_ui_enabled=true
 persist.device_config.device_personalization_services.Translate__enable_ui_translation=true
+persist.device_config.device_personalization_services.Translate__blue_chip_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_opmv4_service=true
+persist.device_config.device_personalization_services.Translate__translation_service_enabled=true
+persist.device_config.device_personalization_services.Translate__copy_to_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_default_langid_model=true
+persist.device_config.device_personalization_services.Translate__enable_language_profile_quick_update=true
+persist.device_config.device_personalization_services.Translate__characterset_lang_detection_enabled=true
+persist.device_config.device_personalization_services.Translate__replace_auto_translate_copied_text_enabled=true
+persist.device_config.device_personalization_services.Superpacks__download_job_enabled=true
+persist.device_config.device_personalization_services.Superpacks__require_charging_by_default=false
+persist.device_config.device_personalization_services.Superpacks__require_idle_by_default=false
+persist.device_config.device_personalization_services.Superpacks__require_wifi_by_default=false
+persist.device_config.device_personalization_services.Superpacks__use_astrea_http_downloader_transport=true
 
 # =============================================================================
 # Android Intelligence — ContentCapture & Translation integration

@@ -29,6 +29,10 @@ PRODUCT_NO_CAMERA := true
 # Torch strength control support
 TORCH_STR_SUPPORTED := true
 
+# VINTF Kernel Requirements check:
+# miatoll uses a non-GKI legacy vendor kernel tree, so disable kernel VINTF enforcement
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
 # ============================================
 # GMS / Package Type Flags
 # ============================================
