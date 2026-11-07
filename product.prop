@@ -68,9 +68,26 @@ persist.device_config.device_personalization_services.Superpacks__use_astrea_htt
 # =============================================================================
 # Android Intelligence — ContentCapture & Translation integration
 # Required for Live Translate, Clipboard AI, and Smart Text Selection
+# Note: package_name_allowlist is intentionally omitted so ContentCapture can
+# observe texts across all apps (WhatsApp, Telegram, Chrome, etc.)
 # =============================================================================
 persist.device_config.content_capture.content_capture_service_explicitly_enabled=true
-persist.device_config.content_capture.package_name_allowlist=com.google.android.as
+persist.device_config.content_capture.service_explicitly_enabled=default
+
+# Live Translate & Blue Chip Floating Bar (both namespace formats for AiAi compatibility)
+persist.device_config.translate.blue_chip_translate_enabled=true
+persist.device_config.translate.chat_translate_languages=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.translate.text_to_text_language_list=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.translate.enable_dictionary_langid_detection=true
+persist.device_config.translate.characterset_lang_detection_enabled=true
+persist.device_config.translate.enable_opmv4_service=true
+persist.device_config.translate.opm_pcdd_enabled=true
+persist.device_config.pecan.emergency_disable_feature_bc_translate=false
+persist.device_config.device_personalization_services.Translate__chat_translate_languages=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.device_personalization_services.Translate__text_to_text_language_list=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.device_personalization_services.Translate__enable_dictionary_langid_detection=true
+persist.device_config.device_personalization_services.Translate__opm_pcdd_enabled=true
+persist.device_config.device_personalization_services.Pecan__emergency_disable_feature_bc_translate=false
 
 # =============================================================================
 # HearingHealth / LoudSoundAlerts — DISABLED
