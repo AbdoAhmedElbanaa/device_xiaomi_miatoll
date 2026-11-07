@@ -1,0 +1,183 @@
+# =============================================================================
+# Google Pixel AI & Intelligence Features Configuration (Android 17 / CP2A)
+# Target Device: Xiaomi SM6250 (miatoll)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. ContentCapture Core Engine
+# Powers on-device context parsing for Live Translate, Overview OCR, and Smart Actions
+# Note: package_name_allowlist omitted so ContentCapture observes across all apps
+# -----------------------------------------------------------------------------
+persist.device_config.content_capture.content_capture_service_explicitly_enabled=true
+persist.device_config.content_capture.service_explicitly_enabled=default
+persist.device_config.content_capture.enable_content_capture_in_screenshot=true
+
+# -----------------------------------------------------------------------------
+# 2. Live Translate & Floating Blue Chip Translation Bar
+# In-app translation bar, offline language models, and chat translation
+# -----------------------------------------------------------------------------
+# DevicePersonalizationServices namespace
+persist.device_config.device_personalization_services.Translate__app_ui_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__live_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__translation_ui_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_ui_translation=true
+persist.device_config.device_personalization_services.Translate__blue_chip_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_opmv4_service=true
+persist.device_config.device_personalization_services.Translate__translation_service_enabled=true
+persist.device_config.device_personalization_services.Translate__copy_to_translate_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_default_langid_model=true
+persist.device_config.device_personalization_services.Translate__enable_language_profile_quick_update=true
+persist.device_config.device_personalization_services.Translate__characterset_lang_detection_enabled=true
+persist.device_config.device_personalization_services.Translate__replace_auto_translate_copied_text_enabled=true
+persist.device_config.device_personalization_services.Translate__enable_dictionary_langid_detection=true
+persist.device_config.device_personalization_services.Translate__opm_pcdd_enabled=true
+persist.device_config.device_personalization_services.Translate__chat_translate_languages=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.device_personalization_services.Translate__text_to_text_language_list=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.device_personalization_services.Pecan__emergency_disable_feature_bc_translate=false
+
+# Subsystem direct namespaces
+persist.device_config.translate.blue_chip_translate_enabled=true
+persist.device_config.translate.chat_translate_languages=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.translate.text_to_text_language_list=en,es,fr,de,it,ja,ko,pt,ru,zh,ar,hi,pl,nl,tr,vi,th
+persist.device_config.translate.enable_dictionary_langid_detection=true
+persist.device_config.translate.characterset_lang_detection_enabled=true
+persist.device_config.translate.enable_opmv4_service=true
+persist.device_config.translate.opm_pcdd_enabled=true
+persist.device_config.pecan.emergency_disable_feature_bc_translate=false
+
+# -----------------------------------------------------------------------------
+# 3. Superpacks & Astrea Model Downloader
+# Background downloading of offline translation, speech, and AI models
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.Superpacks__download_job_enabled=true
+persist.device_config.device_personalization_services.Superpacks__require_charging_by_default=false
+persist.device_config.device_personalization_services.Superpacks__require_idle_by_default=false
+persist.device_config.device_personalization_services.Superpacks__require_wifi_by_default=false
+persist.device_config.device_personalization_services.Superpacks__use_astrea_http_downloader_transport=true
+persist.device_config.superpacks.require_charging_by_default=false
+persist.device_config.superpacks.require_idle_by_default=false
+persist.device_config.superpacks.require_wifi_by_default=false
+
+# -----------------------------------------------------------------------------
+# 4. Live Caption (On-device Speech-to-Text & Subtitles)
+# Floating customizable caption overlay, multi-language, translation & emotion detection
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.Captions__enable=true
+persist.device_config.device_personalization_services.Captions__enable_adaptive_box_width=true
+persist.device_config.device_personalization_services.Captions__allow_box_x_axis_movement=true
+persist.device_config.device_personalization_services.Captions__available_for_download=true
+persist.device_config.device_personalization_services.Captions__enable_audio_pipeline_improvement=true
+persist.device_config.device_personalization_services.Captions__enable_augmented_modality=true
+persist.device_config.device_personalization_services.Captions__enable_live_caption_translate=true
+persist.device_config.device_personalization_services.Captions__enable_language_detection=true
+persist.device_config.device_personalization_services.Captions__enable_multi_language=true
+persist.device_config.device_personalization_services.Captions__enable_speech_profile=true
+persist.device_config.device_personalization_services.Captions__enable_transcribe_audio_channel=true
+persist.device_config.captions.enable=true
+persist.device_config.captions.enable_live_caption_translate=true
+persist.device_config.captions.enable_language_detection=true
+
+# -----------------------------------------------------------------------------
+# 5. Smart Notifications, Smart Reply & OTP 1-Tap Copy
+# Automated verification code extraction, dynamic bundling, contextual actions
+# -----------------------------------------------------------------------------
+persist.sys.notification_assistant=com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService
+persist.device_config.notification.assistant_enabled=true
+persist.device_config.notification.summarization_enabled=true
+persist.device_config.notification.bundles_enabled=true
+persist.device_config.notifications.nm_contextual_display=true
+persist.device_config.notifications.nm_contextual_display_launch=true
+persist.device_config.notifications.nm_insights=true
+persist.device_config.systemui.notification_smart_reply_enabled=true
+
+persist.device_config.device_personalization_services.Notifications__notification_assistant_enabled=true
+persist.device_config.device_personalization_services.Notifications__enable_smart_replies=true
+persist.device_config.device_personalization_services.Notifications__enable_actions=true
+persist.device_config.device_personalization_services.Notifications__enable_importance_ranking=true
+persist.device_config.device_personalization_services.Notifications__enable_notification_summaries=true
+persist.device_config.device_personalization_services.Notifications__enable_dynamic_bundling=true
+persist.device_config.device_personalization_services.Notifications__enable_conversation_detection=true
+persist.device_config.device_personalization_services.Notification__enable_smart_reply=true
+persist.device_config.device_personalization_services.Notification__enable_smart_action=true
+persist.device_config.device_personalization_services.Notification__enable_otp_in_smart_suggestion=true
+persist.device_config.device_personalization_services.Notification__enable_otp_check_for_default_sms_package=true
+persist.device_config.device_personalization_services.Notification__enable_priority_suggestions=true
+persist.device_config.device_personalization_services.Notification__enable_notification_summaries=true
+persist.device_config.device_personalization_services.Notification__enable_dynamic_bundling=true
+
+# -----------------------------------------------------------------------------
+# 6. Recents Overview Smart Selection & Lens OCR
+# OCR text & image selection in recents task switcher (works across all apps)
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.Overview__enable_overview=true
+persist.device_config.device_personalization_services.Overview__enable_image_search=true
+persist.device_config.device_personalization_services.Overview__enable_image_selection=true
+persist.device_config.device_personalization_services.Overview__enable_lens_r_overview_select_mode=true
+persist.device_config.device_personalization_services.Overview__enable_lens_r_overview_translate_action=true
+persist.device_config.device_personalization_services.Overview__enable_lens_r_overview_similar_styles_action=true
+persist.device_config.device_personalization_services.Overview__enable_barcode_detection=true
+persist.device_config.device_personalization_services.Overview__enable_proactive_hints=true
+persist.device_config.device_personalization_services.Overview__enable_matchmaker=true
+persist.device_config.device_personalization_services.Overview__kill_switch_lens_r_overview=false
+
+# -----------------------------------------------------------------------------
+# 7. Screen Attention & Face Detect Auto-Rotate
+# Keeps screen awake while user is looking; prevents unintended rotation while lying down
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.Attention__enabled=true
+persist.device_config.device_personalization_services.Attention__accel_sensor_enabled=true
+persist.device_config.device_personalization_services.Attention__proximity_sensor_enabled=true
+persist.device_config.device_personalization_services.AutoRotate__enable=true
+persist.device_config.device_personalization_services.AutoRotate__enable_face_detection_from_camera=true
+persist.device_config.device_personalization_services.AutoRotate__enable_face_detection_when_phone_in_portrait=true
+persist.device_config.window_manager.auto_rotate_face_detection_enabled=true
+
+# -----------------------------------------------------------------------------
+# 8. Now Playing (Ambient Music Recognition)
+# Recognizes music playing in environment on lock screen and notifications
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.NowPlaying__ambient_music_enable_history=true
+persist.device_config.device_personalization_services.NowPlaying__ambient_music_download_album_art_via_astrea=true
+persist.device_config.device_personalization_services.NowPlaying__ambient_music_dynamic_model_updates_enabled=true
+persist.device_config.device_personalization_services.NowPlaying__ambient_music_check_last_match_enabled=true
+persist.device_config.device_personalization_services.NowPlaying__ambient_music_on_demand_enabled=true
+
+# -----------------------------------------------------------------------------
+# 9. Message Armour (On-device Scam & Phishing Protection)
+# Proactive warning popups for suspicious links and scams in messaging apps
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.MessageArmour__enable_message_armour=true
+persist.device_config.device_personalization_services.MessageArmour__enable_in_chat_warning=true
+persist.device_config.device_personalization_services.MessageArmour__enable_notification_warning_popup_v2=true
+persist.device_config.device_personalization_services.MessageArmour__allow_all_apps_notifications=true
+
+# -----------------------------------------------------------------------------
+# 10. Universal On-Device Search & App Predictions
+# Smart recs in launcher dock, app drawer suggestions, typo-tolerant search
+# -----------------------------------------------------------------------------
+persist.device_config.device_personalization_services.EchoAppPrediction__enable_pipeline=true
+persist.device_config.device_personalization_services.EchoAppPrediction__use_local_multitaskv4_for_hotseat_app_predictions=true
+persist.device_config.device_personalization_services.SmartRecPixelSearch__enable_aiai_tc_generator=true
+persist.device_config.device_personalization_services.SmartRecPixelSearch__enable_appaction_generator=true
+persist.device_config.settings_intelligence.SmartSearchRanking__enable_case_insensitive_partial_match=true
+
+# -----------------------------------------------------------------------------
+# 11. Pixel Battery Widget & Multi-Device Battery Tracking
+# Extended battery widget for connected Bluetooth headsets, watches, and phone
+# -----------------------------------------------------------------------------
+persist.device_config.settings_intelligence.BatteryWidget__is_widget_enabled=true
+persist.device_config.settings_intelligence.BatteryWidget__is_batt_enabled=true
+persist.device_config.settings_intelligence.BatteryWidget__is_event_service_enabled=true
+persist.device_config.device_personalization_services.BatteryWidget__is_widget_enabled=true
+
+# -----------------------------------------------------------------------------
+# 12. Hardware Safety Guard — HearingHealth / LoudSoundAlerts DISABLED
+# Requires Pixel DSP hardware sensor not present on SM6250.
+# MUST REMAIN FALSE to prevent boot crash in LoudSoundAlertsBackgroundService.
+# -----------------------------------------------------------------------------
+persist.device_config.adaptive_audio.HearingHealth__enable_loud_sound_alerts=false
+persist.device_config.device_personalization_services.HearingHealth__enable_loud_sound_alerts=false
+persist.device_config.device_personalization_services.EchoSmartspace__enable_loud_sound_alert=false
+persist.device_config.adaptive_audio.HearingHealth__on_device_enabled=false
+persist.device_config.device_personalization_services.HearingHealth__on_device_enabled=false
+persist.device_config.device_personalization_services.HearingHealth__hearing_protection_on_device=false

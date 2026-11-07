@@ -589,6 +589,23 @@
     <!-- Wallpaper Effects Generation (Cinematic Wallpaper) -->
     <string name="config_defaultWallpaperEffectsGenerationService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.wallpapereffects.AiAiWallpaperEffectsGenerationService</string>
 
+    <!-- Live Caption (System Captions Manager Service) -->
+    <string name="config_defaultSystemCaptionsManagerService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService</string>
+    <bool name="config_systemCaptionsServiceCallsEnabled">true</bool>
+
+    <!-- Screen Attention (Keep screen awake while looking at it) -->
+    <string name="config_defaultAttentionService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.attention.service.AiAiAttentionService</string>
+
+    <!-- Face-Detect Auto-Rotate (Rotation Resolver) -->
+    <string name="config_defaultRotationResolverService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiRotationResolverService</string>
+    <bool name="config_allowRotationResolver">true</bool>
+
+    <!-- Ambient Context Detection -->
+    <string name="config_defaultAmbientContextDetectionService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAmbientContextDetectionService</string>
+
+    <!-- Sound Search & Music Recognition -->
+    <string name="config_defaultMusicRecognitionService" translatable="false">com.google.android.googlequicksearchbox/com.google.android.apps.search.soundsearch.service.SoundSearchService</string>
+
     <!-- Notification Listener Access for Google apps -->
     <string name="config_defaultListenerAccessPackages" translatable="false">com.google.android.apps.nexuslauncher:com.google.android.setupwizard:com.google.android.apps.pixelmigrate:com.google.android.as:com.google.android.projection.gearhead:com.google.pixel.exo:com.google.android.odad:com.google.ambient.streaming:com.google.android.apps.wear.companion</string>
 
