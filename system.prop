@@ -60,11 +60,6 @@ ro.media.recorder-max-base-layer-fps=60
 persist.mm.enable.prefetch=true
 vendor.mm.enable.qcom_parser=16777199
 
-# MiuiCamera
-ro.miui.build.region=in
-ro.miui.notch=1
-ro.product.mod_device=_global
-
 # Phantom process monitoring
 persist.sys.fflag.override.settings_enable_monitor_phantom_procs=false
 

@@ -61,30 +61,21 @@ $(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
+    libui-v34
 
 $(call soong_config_set_bool,camera,override_format_from_reserved,true)
 $(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.miatoll)
 
-# Camera (Shim MiuiCamera libs)
-PRODUCT_PACKAGES += libgui_shim_miuicamera
-
 # Camera (MiuiCamera)
-PRODUCT_PACKAGES += MiuiCamera
-
-PRODUCT_DEXPREOPT_SPEED_APPS += MiuiCamera
-TARGET_USES_MIUI_CAMERA := true
-
-# Camera (MiuiCamera permissions & sysconfig)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/miuicamera/privapp-permissions-miui.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-miui.xml \
-    $(LOCAL_PATH)/miuicamera/miuicamera-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/miuicamera-hiddenapi-package-allowlist.xml
+$(call inherit-product-if-exists, device/xiaomi/miuicamera-miatoll/device.mk)
 
 # DebugFS
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.4-service
+    android.hardware.graphics.composer@2.4-service \
+    libtinyxml2-v34
 
 PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@3.0-impl-qti-display \
@@ -103,6 +94,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, vendor/dolby/dolby-setup.mk)
 # Dolby Vision
 TARGET_SUPPORTS_DOVI := true
+
+# AxionFx
+$(call inherit-product-if-exists, packages/apps/AxionFx/config.mk)
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -162,11 +156,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir-service.example
 
-# Kernel
-TARGET_KERNEL_DIR ?= $(LOCAL_PATH)/prebuilt-kernel
-LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.gz
-PRODUCT_COPY_FILES += $(LOCAL_KERNEL):kernel
-
 # Lineage Health
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
@@ -183,9 +172,11 @@ PRODUCT_PACKAGES += \
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay-service.sdm
+    vendor.lineage.livedisplay-service.sdm \
+    vendor.lineage.livedisplay-service.sysfs
 
 $(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
+$(call soong_config_set_bool,livedisplay_sysfs,enable_dcc,true)
 
 # Media
 PRODUCT_COPY_FILES += \

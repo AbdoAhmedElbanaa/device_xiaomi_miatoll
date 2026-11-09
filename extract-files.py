@@ -54,7 +54,6 @@ lib_fixups: lib_fixups_user_type = {
         'libarcsoft_dualcam_refocus_rear_w',
         'libarcsoft_portrait_lighting',
         'libarcsoft_portrait_lighting_c',
-        'libmegface',
     ): lib_fixup_vendor_suffix,
 }
 
@@ -98,12 +97,6 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace(r'(start|stop) wfdservice\b', r'\1 wfdservice64'),
     'system_ext/lib64/libwfdnative.so': blob_fixup()
         .remove_needed('android.hidl.base@1.0.so'),
-    ### Miui Camera fix Start ###
-    ('system/lib64/libcamera_algoup_jni.xiaomi.so',
-    'system/lib64/libcamera_mianode_jni.xiaomi.so'): blob_fixup()
-        .patchelf_version('0_17_2')
-        .add_needed('libgui_shim_miuicamera.so'),
-    ### Miui Camera fix End ###
 }  # fmt: skip
 
 module = ExtractUtilsModule(

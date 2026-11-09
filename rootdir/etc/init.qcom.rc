@@ -213,6 +213,22 @@ on boot
     chown system system /sys/class/backlight/panel1-backlight/brightness
     chown system system /sys/class/backlight/panel1-backlight/max_brightness
 
+    # KCAL display color control
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_enable
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_min
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_hue
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_sat
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_val
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_cont
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal_enable
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal_min
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal_hue
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal_sat
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal_val
+    chmod 0664 /sys/devices/platform/kcal_ctrl.0/kcal_cont
+
     # Allow access to sensors device attributes
     chown system system /sys/class/sensors/MPU6050-accel/enable
     chown system system /sys/class/sensors/MPU6050-accel/poll_delay
