@@ -19,3 +19,9 @@ on init && property:ro.boot.product.hardware.sku=nfc
 on post-fs-data && property:ro.boot.product.hardware.sku=nfc
     mkdir /data/vendor/nfc 0770 nfc nfc
     mkdir /data/vendor/nfc/param 0770 nfc nfc
+
+on property:init.svc.vendor.nfc_hal_service=running
+    setprop nfc.initialized true
+
+on boot && property:ro.boot.product.hardware.sku=nfc
+    setprop nfc.initialized true
